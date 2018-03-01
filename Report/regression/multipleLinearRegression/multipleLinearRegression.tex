@@ -2,23 +2,31 @@
 
 \subsection{Theory}
 
-Basic theory for simple and multiple lin regs here. From the slides or book.
+Basic theory for simple and multiple lin regs here. From the slides or book\footnote{\cite{James2013}}.
 
-Simple Linear Regression is used to make linear models of data. It has a response Y on the basis of a single predictor variable X. We can write it as
-$Y = \beta_0 + \beta_1 X_1 + \epsilon_i$.
-$ \beta_0 + \beta_1 $ are unknown and to get a response, we must use data to estimate the coefficients.
-$(x_1, y_1), (x_2, y_2), . . . , (x_n, y_n)$
-represent n observation pairs, each of which consists of a measurement of X and a measurement of Y. The drawback of this method is that only a single predictor variable is used and often have more.
- In cases where we want examined the relationship between multiple predictor variables we use Multiple Linear Regression. The model takes the following form $Y = \beta_0 + \beta_1 X_1 + ... + \beta_n X_n + \epsilon_i$
-
-To obtain the Coefficients in the model we use the least squares method to minimize the sum of squared residuals. We pick $\beta_0, \beta_1, ... \beta_p$ to to minimize the sum of squared residuals.
-$$RSS = \sum (y - \hat{y})^2 = \sum( y_i - \hat{\beta_0} - \hat{\beta_1}x_\textit{i}1 + \hat{\beta_2}x_\textit{i}2 - \dots - \hat{\beta_p}x_\textit{i}p )^2$$
-
-To evaluated the model we can use RSE (residual standard error)
+Simple Linear Regression is used to make linear models of data. It has a response Y on the basis of a single predictor variable X. We can write it as:
+\begin{align}\label{fo:simpleLinearRegression}
+Y = \beta_0 + \beta_1 X_1 + \epsilon_i
+\end{align}
+$ \beta_0 + \beta_1 $ are unknown and to get a response, we must use data to estimate the coefficients.$(x_1, y_1)$, $(x_2, y_2)$,\ldots, $(x_n, y_n)$ represent n observation pairs, each of which consists of a measurement of X and a measurement of Y. The drawback of this method is that only a single predictor variable is used and often have more.
+ In cases where we want examined the relationship between multiple predictor variables we use Multiple Linear Regression. The model takes the following form:
+\begin{align}\label{fo:multipleLinearRegression}
+Y = \beta_0 + \beta_1 X_1 + \ldots + \beta_n X_n + \epsilon_i
+\end{align}
+To obtain the estimated Coefficients in the model we use the least squares method to minimize the sum of squared residuals. We pick $\beta_0, \beta_1, ... \beta_p$ to to minimize the sum of squared residuals.
+\begin{align}\label{fo:rss}
+RSS = \sum (y - \hat{y})^2 = \sum( y_i - \hat{\beta_0} - \hat{\beta_1}x_{i1} - \hat{\beta_2}x_{i2} - \ldots - \hat{\beta_p}x_\textit{i}p )^2
+\end{align}
+To evaluated the model we can use RSE (residual standard error). This is done by meaning and rooting the result of the RSS. The outcome of the formula is the average amount that the response will deviate from the regression line. This is also known as an estimate of the $\epsilon$ in the Standard Linear Regression formula (\ref{fo:simpleLinearRegression}) stated earlier in this chapter:
+\begin{align}\label{fo:rse}
+RSE = \sqrt{\dfrac{1}{n-2}\cdot RSS}
+\end{align}
 
 
 \subsection{Results}
 
-LAB 3.6.2 + 3.6.3
+\subsubsection*{LAB 3.6.2}
+
+\subsubsection*{LAB 3.6.3}
 
 \subsection{Conclusion}
