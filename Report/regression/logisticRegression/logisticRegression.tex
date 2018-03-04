@@ -1,11 +1,101 @@
 \subsection{Logistic Regression}\label{sc:logisticRegression}
-
+We sometimes want to classify a response variable that has two classes. Examples of such classes could be being accepted or rejected into school based or the market going up or down. There for our target class Y should be seen as a binary class. Where $0$ suggest Reject(Negative Class) and $1$ suggest Accept(Positive Class).
 \subsection{Theory}
+So we want to model the probability of the default class. If we are modeling people’s gender as male or female based on their shoe size, then the first class could be male and could be written as the probability of male given a person’s shoe size.
+\begin{align}\label{fo:logit}
+P(x) = P(gender=male|ShoeSize) = P(Y=1|X)
+\end{align}
 
-Basic theory for logistic lin regs here. From the slides or book.
+We then use the logistic function seen in \ref{fo:LogisticFunction} because it will gives outputs between 0 and 1 for all values of X and will always produce an S-shaped curve.
+\begin{align}\label{fo:LogisticFunction}
+P(x) = \dfrac{ e^{\beta_0 + \beta_1 X}}{  1 + e^{\beta_0 + \beta_1 X}}
+\end{align}
+ If we move things a little we get the following \ref{fo:logit}. Here we can see that it still a linear model, but we are modeling the propabilities on a non-linear scale.
+\begin{align}\label{fo:logit}
+\log( \dfrac{ P(X)}{1-P(x)} ) = \beta_0 + \beta_1 X
+\end{align}
 
 \subsection{Results}
+In lab 4.6.1 + 4.6.2 we look at stock market data and we will try to predict if the market goes up or down base on the Daily percentage returns for stock index between 2001 and 2005.
+After download the dataset using pandas we display the data to get a sense of it.
+\begin{lstlisting}
+data.head()
+\end{lstlisting}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}183}]:}    Year   Lag1   Lag2   Lag3   Lag4   Lag5  Volume  Today Direction
+1  2001  0.381 -0.192 -2.624 -1.055  5.010  1.1913  0.959        Up
+\end{Verbatim}
+Because the classifier only works with digits we need to change the Today Direction column into a number and split the data set into a y and X.
+\begin{lstlisting}
+y, X = dmatrices('Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume', data, return_type = 'dataframe')
+\end{lstlisting}
+Now that we have y and X we can now use the statsmodels library to create a logistic regression and fit the model. Here we also instruct the api to assign Direction[Up] as a 1 thereby also assign 0 as Direction[Down].
+\begin{lstlisting}
+logit = sm.GLM(y.iloc[:,1],X, family=sm.families.Binomial())
+result = logit.fit() # fit the model
+\end{lstlisting}
 
-LAB 4.6.1 + 4.6.2
+%Now the model is fitted. We can see detailed infomation about our model.
+%\begin{lstlisting}
+%print (result.summary())
+%									--omitted--
+%               coef       std err     z          P>|z|      [0.025      0.975]
+%------------------------------------------------------------------------------
+%Intercept     -0.1260      0.241     -0.523      0.601      -0.598       0.346
+%Lag1          -0.0731      0.050     -1.457      0.145      -0.171       0.025
+%									--omitted--
+%\end{lstlisting}
+%A negative for the Lag1 coefficient tell us that if the market had a positive return yesterday, then it is less likely to go up today. But because the P value kind of big still there is no real evidence of good association between Lag1 and Direction.
+
+To get the accuracy of our model we take the mean of data we predicted correctly model hence it only predicted the movement of the market 52.2\% of the time.
+\begin{lstlisting}
+np.mean(y.iloc[:,1].values == predict_label.iloc[:,0].values) # to get accuracy
+0.52159999999999995
+\end{lstlisting}
+To get better accuracy we will split the dataset into a training set with data before and a test set with data after 2015. This is to get a error rate that matches better with a real serniario where the future is unknown. and try to predict again.
+
+\begin{lstlisting}
+Smarket_2005 = data.query('Year >= 2005')
+Smarket_train = data.query('Year < 2005')
+y_train, X_train = dmatrices('omitted', Smarket_train, return_type = 'dataframe')
+y_test, X_test = dmatrices('omitted', Smarket_2005, return_type = 'dataframe')
+logit = sm.GLM(y_train.iloc[:,1], X_train, family=sm.families.Binomial())
+\end{lstlisting}
+
+Now that our model have been trained we can view detailed information about the fit. A negative for the Lag1 coefficient tell us that if the market had a positive return yesterday, then it is less likely to go up today. But because the P value kind of big still there is no real evidence of good association between Lag1 and Direction.
+
+\begin{lstlisting}
+print( logit.fit().summary())
+                 Generalized Linear Model Regression Results                  
+								--omitted--
+				 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      0.1912      0.334      0.573      0.567      -0.463       0.845
+Lag1          -0.0542      0.052     -1.046      0.295      -0.156       0.047
+Lag2          -0.0458      0.052     -0.884      0.377      -0.147       0.056
+Lag3           0.0072      0.052      0.139      0.889      -0.094       0.108
+Lag4           0.0064      0.052      0.125      0.901      -0.095       0.108
+Lag5          -0.0042      0.051     -0.083      0.934      -0.104       0.096
+Volume        -0.1163      0.240     -0.485      0.628      -0.586       0.353
+==============================================================================
+\end{lstlisting}
+
+
+\begin{lstlisting}
+np.mean(y_test.iloc[:,1].reset_index(drop=True)==predict_label.iloc[:,0].reset_index(drop=True))
+0.48015873015873017
+\end{lstlisting}
+
+The error is still $1 - 0.48 = 0.52$. So it's not that much better then random coin flipping. As we saw earlier our p-values in our model was quit high for Lag3 to Lag5 so by retraining the model without them. This should lead to a more efficient model. 
+\begin{lstlisting}
+y_train, X_train = dmatrices('Direction~Lag1+Lag2', Smarket_train, return_type = 'dataframe')
+y_test, X_test = dmatrices('Direction~Lag1+Lag2', Smarket_2005, return_type = 'dataframe')
+preds = logit.fit().predict(X_test)
+--omitted--
+np.mean(y_test.iloc[:,1].reset_index(drop=True)==predict_label.iloc[:,0].reset_index(drop=True))
+0.44047619047619047
+\end{lstlisting}
+Because 1 - 0.44 = 0.56 there is a 0.56 chance of an error. Hence is shows that there is a 56\% chance that the market should go up on days when the model predict it should. But the dataset is really too small to show if it is trend or just random chance.
 
 \subsection{Conclusion}
+Logistic Regression is a good classifier when we what to classify data. But sometimes want to classify a response variable that has more than two classes. This is where discriminant Classification analysis, is good choice for multiple-class classification.
