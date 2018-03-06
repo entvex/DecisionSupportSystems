@@ -18,7 +18,7 @@ P(x) = \dfrac{ e^{\beta_0 + \beta_1 X}}{  1 + e^{\beta_0 + \beta_1 X}}
 \subsection{Results}
 In lab 4.6.1 + 4.6.2 we look at stock market data and we will try to predict if the market goes up or down base on the Daily percentage returns for stock index between 2001 and 2005.
 After download the dataset using pandas we display the data to get a sense of it.
-\begin{lstlisting}
+\begin{lstlisting}[language=Python]
 data.head()
 \end{lstlisting}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -26,11 +26,11 @@ data.head()
 1  2001  0.381 -0.192 -2.624 -1.055  5.010  1.1913  0.959        Up
 \end{Verbatim}
 Because the classifier only works with digits we need to change the Today Direction column into a number and split the data set into a y and X.
-\begin{lstlisting}
+\begin{lstlisting}[language=Python]
 y, X = dmatrices('Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume', data, return_type = 'dataframe')
 \end{lstlisting}
 Now that we have y and X we can now use the statsmodels library to create a logistic regression and fit the model. Here we also instruct the api to assign Direction[Up] as a 1 thereby also assign 0 as Direction[Down].
-\begin{lstlisting}
+\begin{lstlisting}[language=Python]
 logit = sm.GLM(y.iloc[:,1],X, family=sm.families.Binomial())
 result = logit.fit() # fit the model
 \end{lstlisting}
@@ -48,13 +48,13 @@ result = logit.fit() # fit the model
 %A negative for the Lag1 coefficient tell us that if the market had a positive return yesterday, then it is less likely to go up today. But because the P value kind of big still there is no real evidence of good association between Lag1 and Direction.
 
 To get the accuracy of our model we take the mean of data we predicted correctly model hence it only predicted the movement of the market 52.2\% of the time.
-\begin{lstlisting}
+\begin{lstlisting}[language=Python]
 np.mean(y.iloc[:,1].values == predict_label.iloc[:,0].values) # to get accuracy
 0.52159999999999995
 \end{lstlisting}
 To get better accuracy we will split the dataset into a training set with data before and a test set with data after 2015. This is to get a error rate that matches better with a real serniario where the future is unknown. and try to predict again.
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Python]
 Smarket_2005 = data.query('Year >= 2005')
 Smarket_train = data.query('Year < 2005')
 y_train, X_train = dmatrices('omitted', Smarket_train, return_type = 'dataframe')
@@ -64,7 +64,7 @@ logit = sm.GLM(y_train.iloc[:,1], X_train, family=sm.families.Binomial())
 
 Now that our model have been trained we can view detailed information about the fit. A negative for the Lag1 coefficient tell us that if the market had a positive return yesterday, then it is less likely to go up today. But because the P value kind of big still there is no real evidence of good association between Lag1 and Direction.
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Python]
 print( logit.fit().summary())
                  Generalized Linear Model Regression Results                  
 								--omitted--
@@ -81,13 +81,13 @@ Volume        -0.1163      0.240     -0.485      0.628      -0.586       0.353
 \end{lstlisting}
 
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Python]
 np.mean(y_test.iloc[:,1].reset_index(drop=True)==predict_label.iloc[:,0].reset_index(drop=True))
 0.48015873015873017
 \end{lstlisting}
 
 The error is still $1 - 0.48 = 0.52$. So it's not that much better then random coin flipping. As we saw earlier our p-values in our model was quit high for Lag3 to Lag5 so by retraining the model without them. This should lead to a more efficient model. 
-\begin{lstlisting}
+\begin{lstlisting}[language=Python]
 y_train, X_train = dmatrices('Direction~Lag1+Lag2', Smarket_train, return_type = 'dataframe')
 y_test, X_test = dmatrices('Direction~Lag1+Lag2', Smarket_2005, return_type = 'dataframe')
 preds = logit.fit().predict(X_test)
