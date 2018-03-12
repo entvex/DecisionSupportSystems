@@ -1,1 +1,43 @@
 \section{Quadrat Discriminant Analysis}
+
+\subsection{Theory}
+bla bla
+
+\subsection{Results}
+In lab 4.6.4 Quadratic Discriminant Analysis. We split our data as in lab XXXX. We split the data into before and after 2015 and then make training and testing data. After the data is ready we can import the Quadrat Discriminant Analysis from scikit-learn.
+\begin{lstlisting}[language=Python]
+import sklearn.discriminant_analysis
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+\end{lstlisting}
+The training process. Please note we will only use Lag1 and Lag2. Hint iloc[:,1:3] is a way to get first and the second column of data frame.
+\begin{lstlisting}[language=Python]
+sklearn_qda = QuadraticDiscriminantAnalysis(priors=None,store_covariance=True) #creating a QDA object
+qda = sklearn_qda.fit(X_train.iloc[:,1:3], y_train.iloc[:,1]) #learning the projection matrix
+X_labels = qda.predict(X_train.iloc[:,1:3]) #gives you the predicted label for each sample
+X_prob = qda.predict_proba(X_train.iloc[:,1:3]) #the probability of each sample to belong to each class
+\end{lstlisting}
+Testing step. Now we will test out model using the data.
+\begin{lstlisting}[language=Python]
+X_test_labels = qda.predict(X_test.iloc[:,1:3])
+X_test_prob   = qda.predict_proba(X_test.iloc[:,1:3])
+np.mean(y_test.iloc[:,1]==X_test_labels)
+0.59920634920634919
+\end{lstlisting}
+The QDA predictions are accurate almost 60\% of the time. And we didn't even use all the data to fit the model, because the 2005 data was not used to fit the model. The stock market is pretty hard to model accurately.
+This shows that the Quadrat Discriminant Analysis seem to capture the relationship more accurately than the Linear Discriminant Analysis. The output contains the group means. But it does not contain the coefficients of the linear discriminants, because the QDA classifier involves a quadratic, rather than a linear, function of the predictors.
+
+\begin{lstlisting}[language=Python]
+qda.means_
+array([[ 0.04279022,  0.03389409],
+[-0.03954635, -0.03132544]])
+\end{lstlisting}
+In table format
+\begin{longtable}[]{@{}lll@{}}
+	\toprule
+	& Lag1 & Lag2\tabularnewline
+	\midrule
+	\endhead
+	Down & 0.04279022 & 0.03389409\tabularnewline
+	Up & -0.03954635 & -0.03132544\tabularnewline
+	\bottomrule
+\end{longtable}
