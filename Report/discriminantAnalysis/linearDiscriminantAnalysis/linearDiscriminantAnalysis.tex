@@ -8,15 +8,11 @@ Before we start using LDA there is a  assumption about the data it operates on. 
 Pr(Y=k|X=x) = \frac{\pi_k f_k(x)}{ \sum_{l=1}^{k}\pi_l f_l(x) }
 \end{align}
 
-If we as a example choose to only use one predictor and we would like to obtain the estimate for $f_k(x)$ that we can use in \ref{fo:BayesTheorem} If we assume that $f_k(x)$ is normal distribution it looks like this
+If we as a example choose to only use one predictor and we would like to obtain the estimate for $f_k(x)$ that we can use in \ref{fo:BayesTheorem} If we assume that $f_k(x)$ is a normal distribution and assume that variance is is same for all K classes \ref{fo:BayesTheoremWithNormal}
 
-\begin{align}\label{fo:BayesTheorem}
-Pr(Y=k|X=x) = \frac{\pi_k f_k(x)}{ \sum_{l=1}^{k}\pi_l f_l(x) }
+\begin{align}\label{fo:BayesTheoremWithNormal}
+Pk(x) = \frac{\pi_k \frac{1}{\sqrt{2\pi\sigma)}}\exp(-\frac{1}{2\sigma^2}(x-\mu_k)^2)}{ \sum_{l=1}^{k}\pi_l \frac{1}{\sqrt{2\pi\sigma)}}\exp(-\frac{1}{2\sigma^2}(x-\mu_l)^2) }
 \end{align}
-
-$
-\frac{1}{\sqrt{2\pi\sigma_k)}}\exp{}
-$
 
 \subsection{Results}
 In lab 4.6.3 We use Linear Discriminant Analysis. As we did in lab XXXX we split the data into before and after 2015 and then make training and testing data. Now that we have that out of the way it's time to import the Linear Discriminant Analysis from scikit-learn.
