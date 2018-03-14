@@ -1,6 +1,14 @@
-\section{Quadrat Discriminant Analysis}
+\section{Quadratic Discriminant Analysis}
 \subsection{Theory}
-bla bla
+In some cases, using LDA can be insufficient, since in some cases the data won't be easily deffined as being higher or lower than a linear assumption. In these cases a Quadratic Discriminant Analysis (QDA) can be sufficient. Different from the LDA, the QDA results in a non-linear assumption. The math behind it is given in \ref{fo:quadraticDiscriminantAnalysis1} and \ref{fo:quadraticDiscriminantAnalysis2}.
+
+\begin{align}\label{fo:quadraticDiscriminantAnalysis1}
+\delta_k(x) &= - \frac{1}{2} (x - \mu_k)^T \Sigma_{k}^{-1} (x - \mu_k) - \frac{1}{2} \log|\Sigma_{k}| + \log\pi_k\\
+			\label{fo:quadraticDiscriminantAnalysis2}
+			&= - \frac{1}{2} x^T \Sigma_{k}^{-1} x + x^T \Sigma_{k}^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma_{k}^{-1} \mu_k - \frac{1}{2} \log|\Sigma_{k}| + \log\pi_k
+\end{align}
+
+Where $\Sigma_{k}$ is a covariance matrix for the \textit{k}th class. Under this assumption, the Bayes classifier assigns an observation $X = x$ to the class for which $\sigma_k$ is largest.
 
 \subsection{Results}
 In lab 4.6.4 Quadratic Discriminant Analysis. We split our data as in lab XXXX. We split the data into before and after 2015 and then make training and testing data. After the data is ready we can import the Quadrat Discriminant Analysis from scikit-learn.
