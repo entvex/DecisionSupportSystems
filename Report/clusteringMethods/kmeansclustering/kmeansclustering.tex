@@ -1,0 +1,9 @@
+\section{K-means theory}
+The way that K-means clustering works is that there is a $C_1,...,C_k$ sets that contains part of the observations. These sets needs to satisfy two properties.
+\begin{enumerate}
+	\item $ C_1 \cup C_2 \cup ... \cup C_K = \{ 1,...,n \}$ Which means each observation belongs to at least one of the K clusters.
+	\item $ C_k \cap C_k' = \emptyset $ for all $k \neq k'$ Which means the clusters are non-overlapping basically no observation belongs to more then one cluster.
+\end{enumerate}
+The concept of the algorithm is to find good clusters with a small as possible within-cluster-variation.
+
+minimize $C_1,...,C_k$ $ \sum_K^K WCV(C_K) $  
