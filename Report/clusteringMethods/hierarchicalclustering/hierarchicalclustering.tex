@@ -38,7 +38,7 @@ In lab 10.5.2 we use hierarchical clustering to group a 50 x 50 matrix of random
 
 \begin{figure}[H]
 	\begin{lstlisting}[caption=Hierarchical clustering, label={lst:acpython}, language=Python]
-		np.random.seed(0)
+		np.random.seed(2)
 		X = np.random.rand(20,20)
 		clusterComplete = AgglomerativeClustering(n_clusters=2, affinity='euclidean', compute_full_tree='auto', linkage='complete').fit(X)
 		Labels:  [1 0 1 1 0 0 0 0 0 0 1 0 0 0 1 0 0 1 1 0]
@@ -67,6 +67,8 @@ Figure \ref{fig:dendrogramcluster} shows the dendrograms of the three performed 
 	\caption{Dendrograms for complete, ward and average clustering.}
 	\label{fig:dendrogramcluster}
 \end{figure}
+
+\noindent Generally, we see that hierarchical clustering correctly identifies the lower left cluster and the lower right one, however with ward and average a significant euclidean distance has to be reached for it to split correctly, whereas complete splits the observations into two separate ones early on. 
 
 
 
