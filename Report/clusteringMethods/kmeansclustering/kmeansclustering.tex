@@ -4,6 +4,20 @@ The way that K-means clustering works is that there is a $C_1,...,C_k$ sets that
 	\item $ C_1 \cup C_2 \cup ... \cup C_K = \{ 1,...,n \}$ Which means each observation belongs to at least one of the K clusters.
 	\item $ C_k \cap C_k' = \emptyset $ for all $k \neq k'$ Which means the clusters are non-overlapping basically no observation belongs to more then one cluster.
 \end{enumerate}
-The concept of the algorithm is to find good clusters with a small as possible within-cluster-variation.
+%TODO den formel der, er ikke helt som den skal være LaTeX expert hjælp :)?
 
-minimize $C_1,...,C_k$ $ \sum_K^K WCV(C_K) $  
+The goal of K-means clustering is to find good clusters with a small as possible within-cluster-variation. So we want to minimize $ C_1,...,C_k $. The equation in \ref{fo:k-meansMini} in tries to partition the observations into K clusters so the total within-cluster variation summed over all K is as small as possible.
+\begin{align}\label{fo:k-meansMini}
+\sum_{k=1}^{k} WCV(C_K)
+\end{align}
+To do this we need a distance metric. The one that is typically used is Euclidean distance is given by $d = \sqrt{ (x_2 - x_1)^2 - (y_2 - y_1)^2 } $. Which means the distance between two points is the length of the path connecting them or in other words the straight-line distance between two points in a plane. In \ref{fo:EuclideanDistance} $ |C_k| $ represent the number of observations in the \textit{k}th cluster.
+\begin{align}\label{fo:EuclideanDistance}
+WCV(C_K) = \dfrac{1}{|C_k|}  \sum_{i,i' \varepsilon C_k}   \sum_{j=1}^{p}(x_ij - x_i'j)^2
+\end{align}
+If we combine our two formulas given in \ref{fo:k-meansMini} and \ref{fo:EuclideanDistance} we will get a optimization problem that defines K-means clustering. Were we try to minimize $ C_1,...,C_k $.
+\begin{align}\label{fo:EuclideanDistance}
+\sum_{k=1}^{k} \dfrac{1}{|C_k|}  \sum_{i,i' \varepsilon C_k}   \sum_{j=1}^{p}(x_ij - x_i'j)^2
+\end{align}
+
+\subsection{K-Means Clustering Algorithm}
+
