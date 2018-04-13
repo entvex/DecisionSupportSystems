@@ -1,1 +1,19 @@
 \chapter{Shrinkage Methods} \label{ch:shrinkageMethods}
+Before we talked about methods that can be used to select the best subset of predictors. Now we will look at techniques that can reduce the variance.
+
+
+
+
+\subsection{Ridge regression}
+
+The fomular for Ridge regression can be seen in \ref{fo:RidgeRegression}. In blue we have the RSS of the model ( the loss ) and in red we have the the penalty. The penalty only apply to the slope not the intercept.
+\begin{align}\label{fo:RidgeRegression}
+\color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2  \color{red} \lambda \sum_{j=1}^{p} \beta^2_j 
+\end{align}
+
+
+\subsection{The lasso}
+The fomular for The lasso.... as it can be seen the in blue we have the RSS of the model ( the loss ) and in red we have the the penalty.
+\begin{align}\label{fo:TheLasso}
+\color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2  \color{red} \lambda \sum_{j=1}^{p} |\beta_j|
+\end{align}

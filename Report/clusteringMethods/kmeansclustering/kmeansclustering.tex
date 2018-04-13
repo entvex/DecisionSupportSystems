@@ -19,5 +19,56 @@ If we combine our two formulas given in \ref{fo:k-meansMini} and \ref{fo:Euclide
 \sum_{k=1}^{k} \dfrac{1}{|C_k|}  \sum_{i,i' \varepsilon C_k}   \sum_{j=1}^{p}(x_ij - x_i'j)^2
 \end{align}
 
-\subsection{K-Means Clustering Algorithm}
+The K-Means Clustering Algorithm works like this
+\begin{enumerate}
+	\item Place the k centroids are placed at random.
+	\item Assign each observation to one of the k clusters.
+	\item Move the centroids to the center of their clusters. The new position of each centroid is calculated as the average position of all the points in its cluster.
+\end{enumerate}
+We keep repeating steps 2 and 3 until the algorithm converges( centroid stop moving a lot at each iteration ).
+
+\subsection{Results}
+In lab 10.5.1 we are using the k-means clustering to group data. We start the lab by making a normal distribution put into a 25x2 matrix and in which there are two clusters in the data. We change the first 25 observations with a mean shift relative to the next 25 observations.
+
+We then run the K-means clustering with K = 2 and 20 iterations. As it can be seen output of the algorithm is a set of labels assigning each observation to one of the k groups. The way that these groups are made is by
+creating a centroid for each group. The centroids are the middle of the cluster and they capture the points closest to them and add them to the cluster. We display the labels, cluster centers and the sum of distances of samples to their closest cluster center also called inertia. The plot of this can be seen in figure \ref{fig:kmeansclusteringk2_20Iteration} on the right.
+\begin{figure}[H]
+	\begin{lstlisting}[caption=k-means clustering, label={lst:acpython}, language=Python]
+kmeans2 = KMeans(n_clusters=2, random_state=0,n_init=20).fit(X)
+print( kmeans2.labels_ )
+[0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1 0 1 1 1 1 1 1]
+print( kmeans2.cluster_centers_ )
+[[ 3.91945474 -3.78502692]
+print( kmeans2.inertia_ )
+[ 1.85475744 -4.09063316]]
+	\end{lstlisting}
+\end{figure}
+Next we run the K-means clustering with K = 3 and 20 iterations. The plot of this can be seen in figure \ref{fig:kmeansclusteringk2_20Iteration} on the left.
+\begin{figure}[H]
+	\begin{lstlisting}[caption=k-means clustering, label={lst:acpython}, language=Python]
+kmeans3 = KMeans(n_clusters=3, random_state=0,n_init=20).fit(X)
+print( kmeans3.labels_ )
+
+
+[0 2 0 0 1 2 0 0 0 0 1 0 0 1 2 1 1 1 2 1 1 1 1 1 1]
+print( kmeans3.cluster_centers_ )
+[[ 4.19199303 -4.39210147]
+[ 2.149192   -4.01784344]
+[ 3.97146286 -2.40827367]]
+print( kmeans3.inertia_ )
+27.556976178858864
+	\end{lstlisting}
+\end{figure}
+
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{clusteringMethods/kmeansclustering/fig/k-mean.png}
+	\caption{K-Means Clustering Results with K=2 with 20 iterations on the right and  with K=3 with 20 iterations on the left}
+	\label{fig:kmeansclusteringk2_20Iteration}
+\end{figure}
+
+While k-means clustering is a good algorithm, it is not without it's own flaws. When running K-means clustering with a large number of iterations, such as 20 since otherwise an undesirable local optimum may be obtained. Which simply means that, more than one run of the algorithm with randomized starting centroids could give a better result.
+
 
