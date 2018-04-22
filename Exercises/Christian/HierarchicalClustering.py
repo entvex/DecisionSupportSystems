@@ -34,7 +34,7 @@ def plot_dendrogram(model, **kwargs):
     # Plot the corresponding dendrogram
     dendrogram(linkage_matrix, **kwargs)
 
-np.random.seed(0)
+np.random.seed(2)
 X = np.random.rand(20,20)
     
 print(euclidean_distances(X, X))
