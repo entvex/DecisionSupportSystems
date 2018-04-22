@@ -1,19 +1,19 @@
 \chapter{Shrinkage Methods} \label{ch:shrinkageMethods}
-Before we talked about methods that can be used to select the best subset of predictors. Now we will look at techniques that can reduce the variance.
-
-
-
+Before we talked about methods that can be used to select the best subset of predictors. Shrinkage Methods regularizes or penalties the coefficient by shrinking the coefficients towards zero. Using this techniques that can reduce the variance. 
 
 \subsection{Ridge regression}
 
-The fomular for Ridge regression can be seen in \ref{fo:RidgeRegression}. In blue we have the RSS of the model ( the loss ) and in red we have the the penalty. The penalty only apply to the slope not the intercept.
+The fomular for Ridge regression can be seen in \ref{fo:RidgeRegression}. In blue we have the RSS and in red we have the regularize or penalty term. The penalty term is small when $\beta_1, . ,\beta_p$ are close to zero and it has the effect of shrinking penalty the estimates of $\beta_j$ towards zero. $\lambda$ Also called a tuning parameter decides how much impact the two terms get. If $\lambda = 0$ then we will only get least squares estimates, but as $ \lambda \to \infty$ the penalty terms influence will increase and therefor the coefficients will approach zero. This means that the results will be different depending on the chosen $\lambda$ so for getting a good result picking the right $\lambda$ is very important.
+
+The penalty only apply to the slope not the intercept. The $\lambda$ in the equation control how much 
 \begin{align}\label{fo:RidgeRegression}
 \color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2  \color{red} \lambda \sum_{j=1}^{p} \beta^2_j 
 \end{align}
-
+The reason to Ridge regression over least squares is found in the bias-variance
+trade-off. This is because as our $\lambda$ gets bigger the complexity of the ridge regression fit decreases leading to less variance but more bias.
 
 \subsection{The lasso}
-The fomular for The lasso.... as it can be seen the in blue we have the RSS of the model ( the loss ) and in red we have the the penalty.
+The fomular for The lasso can be seen in figure \ref{fo:TheLasso} as it can be seen the in blue we have the RSS of the model ( the loss ) and in red we have the the penalty. The lasso has a advantage over Ridge regression because of the way the penalty term works. In Ridge it will include all p predictors because the $\lambda \sum_{j=1}^{p} \beta^2_j$ only shrink all of the coefficients towards zero but not setting any of them to zero. In lasso we use as E \_ 1 norm of a coefficient vector $\beta$ is given by $ \lVert \beta_1 \rVert = \sum | \beta_j |$ which makes some of the coefficient estimates to be exactly equal to zero when the tuning parameter $ \lambda $ is large enough.
 \begin{align}\label{fo:TheLasso}
 \color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2  \color{red} \lambda \sum_{j=1}^{p} |\beta_j|
 \end{align}
