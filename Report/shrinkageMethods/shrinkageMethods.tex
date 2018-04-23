@@ -13,7 +13,12 @@ The reason to Ridge regression over least squares is found in the bias-variance
 trade-off. This is because as our $\lambda$ gets bigger the complexity of the ridge regression fit decreases leading to less variance but more bias.
 
 \subsection{The lasso}
-The fomular for The lasso can be seen in figure \ref{fo:TheLasso} as it can be seen the in blue we have the RSS of the model ( the loss ) and in red we have the the penalty. The lasso has a advantage over Ridge regression because of the way the penalty term works. In Ridge it will include all p predictors because the $\lambda \sum_{j=1}^{p} \beta^2_j$ only shrink all of the coefficients towards zero but not setting any of them to zero. In lasso we use as E \_ 1 norm of a coefficient vector $\beta$ is given by $ \lVert \beta_1 \rVert = \sum | \beta_j |$ which makes some of the coefficient estimates to be exactly equal to zero when the tuning parameter $ \lambda $ is large enough.
+The fomular for The lasso can be seen in figure \ref{fo:TheLasso} as it can be seen the in blue we have the RSS of the model ( the loss ) and in red we have the the penalty. The lasso has a advantage over Ridge regression because of the way the penalty term works. In Ridge it will include all p predictors because the $\lambda \sum_{j=1}^{p} \beta^2_j$ only shrink all of the coefficients towards zero but not setting any of them to zero. In lasso we use as E \_ 1 norm of a coefficient vector $\beta$ is given by $ \lVert \beta_1 \rVert = \sum | \beta_j |$ which makes some of the coefficient estimates to be exactly equal to zero when the tuning parameter $\lambda$ is large enough.
 \begin{align}\label{fo:TheLasso}
 \color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2  \color{red} \lambda \sum_{j=1}^{p} |\beta_j|
 \end{align}
+Because The lasso removes some of the variables they are generally much easier to understand than ridge regression models because they are sparse models
+models that involve only a subset of the variables. As before selecting a good $\lambda$ is again important here.
+
+
+
