@@ -20,7 +20,7 @@ The reason to Ridge regression over least squares is found in the bias-variance
 trade-off. This is because as our $\lambda$ gets bigger the complexity of the ridge regression fit decreases leading to less variance but more bias.
 
 \subsection{The lasso regression}
-The formula for least absolute shrinkage and selection operator, also called Lasso, can be seen in figure \ref{fo:TheLasso}. The blue part of the equation is the RSS (the ) and the red part is the penalty. The lasso regression has a advantage over Ridge regression because of the way the penalty term works. In Ridge it will include all $p_i$ predictors because the $\lambda \sum_{j=1}^{p} \beta^2_j$ only shrink all of the coefficients towards zero but not setting any of them to zero. In lasso we use as E \_ 1 norm of a coefficient vector $\beta$ is given by $ \lVert \beta_1 \rVert = \sum | \beta_j |$ which makes some of the coefficient estimates to be exactly zero when the tuning parameter $\lambda$ is large enough.
+The formula for least absolute shrinkage and selection operator, also called Lasso, can be seen in figure \ref{foTheLasso}. The blue part of the equation is the RSS (the ) and the red part is the penalty. The lasso regression has a advantage over Ridge regression because of the way the penalty term works. In Ridge it will include all $p_i$ predictors because the $\lambda \sum_{j=1}^{p} \beta^2_j$ only shrink all of the coefficients towards zero but not setting any of them to zero. In lasso we use as E \_ 1 norm of a coefficient vector $\beta$ is given by $ \lVert \beta_1 \rVert = \sum | \beta_j |$ which makes some of the coefficient estimates to be exactly zero when the tuning parameter $\lambda$ is large enough.
 \begin{align}\label{fo:TheLasso}
 \color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2  \color{red} \lambda \sum_{j=1}^{p} |\beta_j|
 \end{align}
@@ -29,6 +29,14 @@ Because the lasso regression removes some of the coefficients, lasso models are 
 \subsection{Comparing ridge and lasso regression}
 
 - Show here which is better when. MSE? RSS? What makes one superior to the other?
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{shrinkageMethods/fig/normsL1_L2.jpg}
+	\caption{The red eclipse shows the concurs of ridge (left) and lasso (right) regression. The blue areas are constraint regions for the first and second norm. Notice that lasso intersects the constraint region at an axis, whereas ridge does not.}
+	\label{fig:normfirstsecond}
+\end{figure}
 
 \section{Results}
 
