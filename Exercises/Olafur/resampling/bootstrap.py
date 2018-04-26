@@ -7,9 +7,11 @@ import pandas as pd
 import statsmodels.formula.api as formula
 
 def fn(data, X_column, Y_column):
+    # data the data set to operate on
+    # X_column the column, in data, we want to get the coefficient for
+    # Y_column the column ,in data, we want to estimate the relation to X_column.
     Y = data.loc[:, Y_column]
     X = data.loc[:, X_column]
-    Y.var()
     cov = data.cov().loc[X_column,Y_column]
     return (Y.var() - cov)/(X.var()+Y.var()-2*cov)
 
@@ -82,15 +84,19 @@ quad_auto = formula.ols("mpg ~ horsepower + np.power(horsepower, 2)", data=auto_
 print quad_auto.summary()
 
 print "original params"
-print " Intercept:  mean:  {}".format(quad_auto.params["Intercept"])
-print " Intercept:  error: {}".format(quad_auto.bse["Intercept"])
-print " horsepower: mean:  {}".format(quad_auto.params["horsepower"])
-print " horsepower: error: {}".format(quad_auto.bse["horsepower"])
+print " Intercept:  mean:               {}".format(quad_auto.params["Intercept"])
+print " Intercept:  error:              {}".format(quad_auto.bse["Intercept"])
+print " horsepower: mean:               {}".format(quad_auto.params["horsepower"])
+print " horsepower: error:              {}".format(quad_auto.bse["horsepower"])
+print " np.power(horsepower, 2): mean:  {}".format(quad_auto.params["np.power(horsepower, 2)"])
+print " np.power(horsepower, 2): error: {}".format(quad_auto.bse["np.power(horsepower, 2)"])
 
 bootstrap_quad_auto = pd.DataFrame(boot_lm(auto_data, "mpg ~ horsepower + np.power(horsepower, 2)", 1000))
 
 print "Bootstrapped params"
-print " Intercept:  mean:  {}".format(bootstrap_quad_auto.loc[:, "Intercept"].mean())
-print " Intercept:  error: {}".format(bootstrap_quad_auto.loc[:, "Intercept"].sem())
-print " horsepower: mean:  {}".format(bootstrap_quad_auto.loc[:, "horsepower"].mean())
-print " horsepower: error: {}".format(bootstrap_quad_auto.loc[:, "horsepower"].sem())
+print " Intercept:  mean:               {}".format(bootstrap_quad_auto.loc[:, "Intercept"].mean())
+print " Intercept:  error:              {}".format(bootstrap_quad_auto.loc[:, "Intercept"].sem())
+print " horsepower: mean:               {}".format(bootstrap_quad_auto.loc[:, "horsepower"].mean())
+print " horsepower: error:              {}".format(bootstrap_quad_auto.loc[:, "horsepower"].sem())
+print " np.power(horsepower, 2): mean:  {}".format(bootstrap_quad_auto.loc[:, "np.power(horsepower, 2)"].mean())
+print " np.power(horsepower, 2): error: {}".format(bootstrap_quad_auto.loc[:, "np.power(horsepower, 2)"].sem())
