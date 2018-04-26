@@ -1,7 +1,22 @@
-\section{Selection Methods}
+\section{Best Subset Selection}
+\subsection{Theory}
+The best subset selection is a selection method trying all outcomes with the different predictors ($p$) of a given dataset. Going through the subset selection stepwise, start off with the null model ($M_0$). This model is a model without any predictors, and is used to calculate the sample mean. Next step, for $k = 1, 2, \dots p$ fit the $( \begin{smallmatrix} p \\ k \end{smallmatrix} )$ with exactly $k$ predictors. Pick the best among the $( \begin{smallmatrix} p \\ k \end{smallmatrix} )$ models, and call this $M_k$, where best is defined as the smallest $RSS$ or highest $R^2$.
 
-\subsection{Best Subset Selection}
+Using the best subset selection is by far the best way of deciding the most efficient predictors of a given dataset, however going through all outcomes this way, takes a lot of computation power. Using formula \ref{fo:BestSubsetCalculationAmounts}, the amount of computations can be calculated for each calculation of $M_k$.
+\begin{align}\label{fo:BestSubsetCalculationAmounts}
+	\begin{pmatrix}
+		p \\ k
+	\end{pmatrix}
+	= \dfrac{p!}{k!(p-k)!}
+\end{align}
 
-\subsection{Forward/Backward Stepwise Selection}
+\subsection{Results}
+LAB 6.5.1
 
-\subsection{Hybrid Methods}
+\section{Forward/Backward Stepwise Selection}
+\subsection{Theory}
+\subsection{Results}
+
+\section{Hybrid Methods}
+\subsection{Theory}
+\subsection{Results}

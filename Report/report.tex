@@ -1,7 +1,7 @@
 \makeatletter
 \def\input@path{{../DecisionSupportSystems/}}
 \makeatother
-\documentclass[a4paper,11pt,twoside,openright]{memoir}
+\documentclass[a4paper,11pt,oneside]{memoir}
 \input{preamble/preamble}
 
 %Debugging
@@ -10,7 +10,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \title{Decision Support Systems \\ Team 3}
-\author{Repport \\ Aarhus University, Science and Technology \\ Lector: Christian Fischer Pedersen}
+\author{Report \\ Aarhus University, Science and Technology \\ Lector: Christian Fischer Pedersen}
 \date{\today}
 \begin{document}
 \fancyhf{} %Clear all header/footers
@@ -46,25 +46,24 @@
 \mainmatter
 \pagestyle{fancy}
 \fancyhf{} %Clear all header/footers
-\fancyhead[RO,LE]{Team No???}
-\fancyhead[CE,CO]{\nouppercase{\leftmark}}
-\fancyhead[LO,RE]{Ingeniørhøjskolen, Aarhus Universitet}
-\fancyfoot[CO,CE]{\nouppercase{\rightmark}}
-\fancyfoot[LE,RO]{\thepage}
+\fancyhead[R]{Team No. 3}
+\fancyhead[C]{\nouppercase{\leftmark}}
+\fancyhead[L]{Aarhus University}
+\fancyfoot[C]{\nouppercase{\rightmark}}
+\fancyfoot[R]{\thepage}
 
-\include{introduction/introduction}								    \cleartorightpage
-\include{regression/regression}										\cleartorightpage
-\include{discriminantAnalysis/discriminantAnalysis}
-\cleartorightpage
-\include{crossValidation/crossValidation}							\cleartorightpage
-\include{crossValidation/bootstrap}     							\cleartorightpage
-\include{subsetSelection/subsetSelection}							\cleartorightpage
-\include{shrinkageMethods/shrinkageMethods}							\cleartorightpage
-\include{clusteringMethods/clusteringMethods}						\cleartorightpage
-\include{discussion/discussion}								        \cleartorightpage
-\include{conclusion/conclusion}										\cleartorightpage
-\include{perspectives/perspectives}									\cleartorightpage
-\include{bibliography/bibliography}									\cleartorightpage
+\include{introduction/introduction}								    \clearpage
+\include{regression/regression}										\clearpage
+\include{discriminantAnalysis/discriminantAnalysis}					\clearpage
+\include{crossValidation/crossValidation}							\clearpage
+\include{crossValidation/bootstrap}     							\clearpage
+\include{subsetSelection/subsetSelection}							\clearpage
+\include{shrinkageMethods/shrinkageMethods}							\clearpage
+\include{clusteringMethods/clusteringMethods}						\clearpage
+\include{discussion/discussion}								        \clearpage
+\include{conclusion/conclusion}										\clearpage
+\include{perspectives/perspectives}									\clearpage
+\include{bibliography/bibliography}									\clearpage
 
 %etc...
 
