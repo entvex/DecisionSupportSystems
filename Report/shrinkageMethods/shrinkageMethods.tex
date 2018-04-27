@@ -39,6 +39,52 @@ Because the lasso regression removes some of the coefficients, lasso models are 
 \end{figure}
 
 \section{Results}
-
-- Labs here.
-- Show MSE. Compare. Use bootstrap. Explain why lasso/ridge is better and when.
+In lab 6.6.1 we use Ridge Regression on the hitters dataset. We use scikit-lean and their implmeation. After loading the data we found that some players had missing salary, therefor these were dropped. The data also contained some string values and using pandas we have converted them into dummy variables.  
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{shrinkageMethods/fig/data.png}
+	\caption{The data after removing missing values and making strings into dummy variables }
+	\label{fig:normfirstsecond}
+\end{figure}
+Then we split our data into a training and test set and we try to run Ridge Regression with a alpha of 4 and display our mean squared error.
+\begin{lstlisting}[language=Python]
+ridge = Ridge(alpha=4)
+ridge.fit(X_train, y_train)
+result = ridge.predict(X_test)
+metrics.mean_squared_error(y_test, result)
+134512.83820473132
+\end{lstlisting}
+After that we display some of the coefficients.
+\begin{lstlisting}[language=Python]
+pd.Series(ridge.coef_.flatten(), index=X.columns)
+AtBat          -2.185390
+Hits            7.392346
+HmRun          -2.666724
+-- omitted --
+\end{lstlisting}
+If we run the same code again but with a alpha that is very large $10^10$ then are coefficients get even smaller.
+\begin{lstlisting}[language=Python]
+AtBat          5.135079e-04
+Hits           1.771301e-04
+HmRun          2.568334e-05
+\end{lstlisting}
+And our MSE also gets even higher.
+\begin{lstlisting}[language=Python]
+211698.60251243794
+\end{lstlisting}
+As discussed in the theory and see just before picking the right alpha part of this is important. We will now use cross validation to pick the best alpha using scikit learn's RidgeCV. That is Ridge regression with built-in cross-validation.
+\begin{lstlisting}[language=Python]
+alphas = 10**np.linspace(100,-4,1000)
+ridgecv = RidgeCV(alphas=alphas, scoring='neg_mean_squared_error')
+ridgecv.fit(scale(X_train), y_train)
+ridgecv.alpha_
+2.3570694139967037
+\end{lstlisting}
+Now we will use the alpha we found using  cross validation and check our result.
+\begin{lstlisting}[language=Python]
+ridge = Ridge(2.3570694139967037)
+ridge.fit(X_train, y_train)
+result = ridge.predict(X_test)
+metrics.mean_squared_error(y_test, result)
+134355.75204499933
+\end{lstlisting}
