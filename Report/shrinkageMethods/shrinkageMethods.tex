@@ -60,13 +60,13 @@ pd.Series(ridge.coef_.flatten(), index=X.columns)
 AtBat          -2.185390
 Hits            7.392346
 HmRun          -2.666724
--- omitted --
 \end{lstlisting}
 If we run the same code again but with a alpha that is very large $10^10$ then are coefficients get even smaller.
 \begin{lstlisting}[language=Python]
 AtBat          5.135079e-04
 Hits           1.771301e-04
 HmRun          2.568334e-05
+-- omitted --
 \end{lstlisting}
 And our MSE also gets even higher.
 \begin{lstlisting}[language=Python]
@@ -88,3 +88,27 @@ result = ridge.predict(X_test)
 metrics.mean_squared_error(y_test, result)
 134355.75204499933
 \end{lstlisting}
+In lab 6.6.2 we use The Lasso and the same steps to prepere the dataset as before. We need to select the best alpha and to do this we use LassoCV that has cross validation built ind.
+\begin{lstlisting}[language=Python]
+from sklearn.linear_model import LassoCV
+alphas = 10**np.linspace(100,-20,100)
+lassoCV = LassoCV(alphas=alphas)
+lassoCV.fit(X_train, y_train)
+lassoCV.alpha_
+1072.2672220103254
+\end{lstlisting}
+As we can see some of the coefficients here are zero just as we described in the theory section.
+\begin{lstlisting}[language=Python]
+pd.Series(lassoCV.coef_.flatten(), index=X.columns)
+AtBat          0.729684
+Hits           0.000000
+HmRun         -0.000000
+Runs           0.000000
+-- omitted --
+\end{lstlisting}
+
+
+
+
+
+
