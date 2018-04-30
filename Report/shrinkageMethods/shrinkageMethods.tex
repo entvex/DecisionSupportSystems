@@ -2,14 +2,19 @@
 Before we talked about methods that can be used to select the best subset of predictors. Shrinkage Methods regularizes or penalties the coefficient by shrinking the coefficients towards zero. Using this techniques that can reduce the variance. 
 
 \section{Theory}
-
 \subsection{Vector norm}
+A norm is a function that gives a positive length to each vector in a vector space.
 
-- Theory about the norm, zero, first, second, how we find it.
-- Figure 6.7 in book. Connect this to ridge/lasso regression.
+Using the P-norm$ \lVert X \rVert_p = ( \sum_{i=1}^{n}|x_i|^p  )^1/p $ \textbf{ref til wiki Norm(mathematics)}. If we set $ p = 1 $ we get the first norm also called the Manhattan norm. It got it's name because it works in a similar to how a taxi would drive in New York City always in a grid-like route 1 block the east then 2 block to the north. The second norm is called Euclidean distance and that is the distance in a straight line just as a bird would fly. Both norms can be seen visually on Figure \ref{fig:normfirstsecond}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{shrinkageMethods/fig/normsL1_L2.jpg}
+	\caption{The red eclipse shows the concurs of ridge (left) and lasso (right) regression. The blue areas are constraint regions for the first and second norm. Notice that lasso intersects the constraint region at an axis, whereas ridge does not.}
+	\label{fig:normfirstsecond}
+\end{figure}
 
 \subsection{Ridge regression}
-
 The formula for Ridge regression can be seen in \ref{fo:RidgeRegression}. In blue we have the residual sum of square (RSS) term and in red we have the regularize or penalty term. The penalty term is small when $\beta_1, . ,\beta_p$ are close to zero and it has the effect of shrinking or penalizing the estimates of the coefficients $\beta_j$ towards zero. $\lambda$ also called a tuning parameter decides how much impact the two terms get. If $\lambda = 0$ then we will only get least squares estimates, but as $ \lambda \to \infty$ the penalty terms influence will increase and therefore the coefficients will approach zero. This means that the results will be different depending on the chosen $\lambda$ so for getting a good result picking the right $\lambda$ is important.
 
 \noindent The penalty term only apply to the slope, not the intercept. $\lambda$ in in \ref{fo:RidgeRegression} control the degree of penalty.
@@ -29,14 +34,6 @@ Because the lasso regression removes some of the coefficients, lasso models are 
 \subsection{Comparing ridge and lasso regression}
 
 - Show here which is better when. MSE? RSS? What makes one superior to the other?
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.3\textwidth]{shrinkageMethods/fig/normsL1_L2.jpg}
-	\caption{The red eclipse shows the concurs of ridge (left) and lasso (right) regression. The blue areas are constraint regions for the first and second norm. Notice that lasso intersects the constraint region at an axis, whereas ridge does not.}
-	\label{fig:normfirstsecond}
-\end{figure}
 
 \section{Results}
 In lab 6.6.1 we use Ridge Regression on the hitters dataset. We use scikit-lean and their implmeation. After loading the data we found that some players had missing salary, therefor these were dropped. The data also contained some string values and using pandas we have converted them into dummy variables.  
@@ -90,7 +87,6 @@ metrics.mean_squared_error(y_test, result)
 \end{lstlisting}
 In lab 6.6.2 we use The Lasso and the same steps to prepere the dataset as before. We need to select the best alpha and to do this we use LassoCV that has cross validation built ind.
 \begin{lstlisting}[language=Python]
-from sklearn.linear_model import LassoCV
 alphas = 10**np.linspace(100,-20,100)
 lassoCV = LassoCV(alphas=alphas)
 lassoCV.fit(X_train, y_train)
