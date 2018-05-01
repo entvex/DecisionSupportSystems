@@ -30,6 +30,7 @@ def boot_lm(data, r_formula, B):
     # B the number of iterations of bootstrapping
     coef = []
     for i in range(0,B):
+        # Take least squares regression of each resample using r_formula.
         v = formula.ols(r_formula, data=data.sample(frac=1.0, replace=True)).fit()
         coef.append(v.params)
     return coef
