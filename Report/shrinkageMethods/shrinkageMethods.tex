@@ -5,11 +5,11 @@ Before we talked about methods that can be used to select the best subset of pre
 \subsection{Vector norm}
 A norm is a function that gives a positive length to each vector in a vector space.
 
-Using the P-norm$ \lVert X \rVert_p = ( \sum_{i=1}^{n}|x_i|^p  )^1/p $ \textbf{ref til wiki Norm(mathematics)}. If we set $ p = 1 $ we get the first norm also called the Manhattan norm. It got it's name because it works in a similar to how a taxi would drive in New York City always in a grid-like route 1 block the east then 2 block to the north. The second norm is called Euclidean distance and that is the distance in a straight line just as a bird would fly. Both norms can be seen visually on Figure \ref{fig:normfirstsecond}.
+\noindent Using the P-norm$ \lVert X \rVert_p = ( \sum_{i=1}^{n}|x_i|^p  )^1/p $ \textbf{ref til wiki Norm(mathematics)}. If we set $ p = 1 $ we get the first norm also called the Manhattan norm. It got it's name because it works in a similar to how a taxi would drive in New York City always in a grid-like route 1 block the east then 2 block to the north. The second norm is called Euclidean distance and that is the distance in a straight line just as a bird would fly. Both norms can be seen visually on Figure \ref{fig:normfirstsecond}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.3\textwidth]{shrinkageMethods/fig/normsL1_L2.jpg}
+	\includegraphics[width=0.6\textwidth]{shrinkageMethods/fig/normsL1_L2.jpg}
 	\caption{The red eclipse shows the concurs of ridge (left) and lasso (right) regression. The blue areas are constraint regions for the first and second norm. Notice that lasso intersects the constraint region at an axis, whereas ridge does not.}
 	\label{fig:normfirstsecond}
 \end{figure}
@@ -33,10 +33,10 @@ Because the lasso regression removes some of the coefficients, lasso models are 
 
 \subsection{Comparing ridge and lasso regression}
 
-- Show here which is better when. MSE? RSS? What makes one superior to the other?
+From equations \ref{fo:RidgeRegression} and \ref{fo:TheLasso} we see that a Lasso regression model could potentially end up with less variables than Ridge regression, since the coefficients can be forced to equal zero, because of the $\ell_1$ penalty. This is called sparsity. You would typically use Ridge regression to prevent over-fitting, since it keeps all features, but can prove less useful with a large number of features (\textit{p} > \textit{n}) On the other hand, Lasso is useful when you have many features and provides you with a more sparse model that could prove a computational advantage. In terms of prediction error, Ridge regression generally performs better in terms of bias, variance and MSE when the predictors are related to the response, that is none of the true coefficients are zero. However if the response is just a subset of the original predictors, we tend to get better results with Lasso regression.
 
 \section{Results}
-In lab 6.6.1 we use Ridge Regression on the hitters dataset. We use scikit-lean and their implmeation. After loading the data we found that some players had missing salary, therefor these were dropped. The data also contained some string values and using pandas we have converted them into dummy variables.  
+In lab 6.6.1 we use Ridge Regression on the hitters dataset. We use scikit-lean and their implmeation. After loading the data we found that some players had missing salary, therefor these were dropped. The data also contained some string values and usingf'' pandas we have converted them into dummy variables.  
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{shrinkageMethods/fig/data.png}
