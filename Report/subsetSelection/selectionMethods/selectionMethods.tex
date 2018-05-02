@@ -1,8 +1,13 @@
 \section{Best Subset Selection}
 \subsection{Theory}
-The best subset selection is a selection method trying all outcomes with the different predictors ($p$) of a given dataset. Going through the subset selection stepwise, start off with the null model ($M_0$). This model is a model without any predictors, and is used to calculate the sample mean. Next step, for $k = 1, 2, \dots p$ fit the $( \begin{smallmatrix} p \\ k \end{smallmatrix} )$ with exactly $k$ predictors. Pick the best among the $( \begin{smallmatrix} p \\ k \end{smallmatrix} )$ models, and call this $M_k$, where best is defined as the smallest $RSS$ or highest $R^2$.
-
-Using the best subset selection is by far the best way of deciding the most efficient predictors of a given dataset, however going through all outcomes this way, takes a lot of computation power. Using formula \ref{fo:BestSubsetCalculationAmounts}, the amount of computations can be calculated for each calculation of $M_k$.
+The best subset selection is a selection method trying all outcomes with the different predictors ($p$) of a given dataset. Going through the subset selection stepwise:
+\begin{enumerate}
+	\item Start off with the null model ($M_0$). This model is a model without any predictors, and is used to calculate the sample mean. 
+	\item Next step, for $k = 1, 2, \dots p$ fit the $( \begin{smallmatrix} p \\ k \end{smallmatrix} )$ with exactly $k$ predictors. Pick the best among the $( \begin{smallmatrix} p \\ k \end{smallmatrix} )$ models, and call this $M_k$, where best is defined as the smallest $RSS$ or highest $R^2$.
+	\item Last step, select a single best model from among $M_0,\dots,M_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$.
+\end{enumerate}
+ 
+Using the best subset selection is one of the better ways of deciding the most efficient predictors of a given dataset, however going through all outcomes this way, takes a lot of computation power. Using formula \ref{fo:BestSubsetCalculationAmounts}, the amount of computations can be calculated for each calculation of $M_k$.
 \begin{align}\label{fo:BestSubsetCalculationAmounts}
 	\begin{pmatrix}
 		p \\ k
@@ -10,12 +15,32 @@ Using the best subset selection is by far the best way of deciding the most effi
 	= \dfrac{p!}{k!(p-k)!}
 \end{align}
 
+The best subset selection method can also lead to overfitting and high variance of the coefficient estimates, which is unwanted in most cases. 
+
+These two reasons make stepwise methods a very attractive alternative, to best subset selection. 
+
 \subsection{Results}
 LAB 6.5.1
 
 \section{Forward/Backward Stepwise Selection}
 \subsection{Theory}
+Forward and backward stepwise selection are pretty similar, the difference is whether to start the model with no predictors (Forward) or to start the model with all predictors (Backward).
+
+\textbf{Forward stepwise selection}, begins with a model containing no predictors, and then stepwise adds predictors to the model, however for each step the variable that gives the greatest additional improvement the fit is added. This means that not every single combination of $k$ predictors are analyzed, instead only one additional predictor at $k$ step is added to the already decided $k-1$ predictors, from the steps beforehand. Going through the forward stepwise selection:
+\begin{enumerate}
+	\item Let $M_0$ denote the null model, which contains no predictors.
+	\item For $k=0,\dots,p-1$:
+	\begin{enumerate}
+		\item Consider all $p-k$ models that augment the predictors in $M_k$ with one additional predictor.
+		\item Choose the best among these $p-k$ models, and call it $M_{k+1}$. Here best is defined as having smallest RSS or highest $R^2$.
+	\end{enumerate}
+	\item Select a single best model from among $M_0,\dots,M_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$. 
+\end{enumerate}
+
+\textbf{Backward stepwise selection}, is 
+
 \subsection{Results}
+LAB 6.5.2
 
 \section{Hybrid Methods}
 \subsection{Theory}
