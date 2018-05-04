@@ -1,6 +1,6 @@
 \chapter{Cross Validation} \label{ch:crossValidation}
 
-Cross validation is evaluation of model. The cross validation is better then residuals. The reason is that with the residuals they do not give an indication how well the model will predict with the new data that it did not sow. One way to avoid this problem is to divide the data in several peace, in this case some data can be removed from training set to validate the model. This is the basic idea of cross validation. There is several possibilities how can we perform cross validation some of them will be described below.
+Cross validation is used for evaluation the model. The cross validation is better for example residuals. The reason is that with the residuals they do not give an indication how well the model will predict with the new data that it did not sow. One way to avoid this problem is to divide the data in several peace, in this case some data can be removed from training set to validate the model. This is the basic idea of cross validation. The cross validation best use is when we do not have test or validation data set or we have a small sample. There is several possibilities how can we perform cross validation some of them will be described below.
 \section {Validation set approach}
 \subsection{Theory}
 
@@ -36,7 +36,7 @@ As we can see below the MSE is quit high.
 --------Test Error for 1st order--------
 23.36190289258723
 \end{lstlisting}
-We can reduce the MSE polynomial or cubic regression.
+We can reduce the MSE with polynomial or cubic regression.
 \begin{lstlisting}[language=Python]
 lm2 = smf.ols ('mpg~horsepower + I(horsepower ** 2.0)', traindata).fit()
 preds2 = lm2.predict(data)
@@ -73,6 +73,38 @@ CV_{(K)} = \sum_{k=1}^{K}  \frac {n_{k}}{n}MSE_{(k)}
 \end{align}
 
 \subsection{Result}
+In the lab 5.3.3 we used K-fold cross validation find the MSE. We are using auto data from the book. In this particular case we are using k = 10. 
+\begin{lstlisting}[language=Python]
+from sklearn.model_selection import KFold
+
+X = Data["horsepower"].values.reshape(-1,1) 
+y = Data["mpg"].values.reshape(-1,1)
+kf= KFold()
+kf.n_splits = 10
+\end{lstlisting}
+Now we need to make a loop for all the folds to calculate MSE.   
+
+\begin{lstlisting}[language=Python]
+ytests = []
+ypreds = []
+
+for train_index, test_index in kf.split(Data):
+	X_train, X_test = X[train_index], X[test_index]
+	y_train, y_test = y[train_index], y[test_index]
+
+	model = linear_model.LinearRegression()
+	model.fit(X = X_train, y = y_train)
+	y_pred = model.predict(X_test)  
+	ypreds += list(y_pred)
+	ytests += list(y_test)
+	ms_error = metrics.mean_squared_error(ytests, ypreds)
+	print("%.2f" %ms_error, end=" ")
+\end{lstlisting}
+Out put of the code is:
+\begin{lstlisting}[language=Python]
+28.35 22.79 24.14 23.95 22.29 21.56 20.92 21.16 26.11 27.42 
+\end{lstlisting}
+Having all MSE we can choose the best model from the results. or 
 
 \section {Leave one out cross validation}
 
