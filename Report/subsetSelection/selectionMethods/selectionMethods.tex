@@ -7,7 +7,7 @@ The best subset selection is a selection method trying all outcomes with the dif
 	\item Last step, select a single best model from among $M_0,\dots,M_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$.
 \end{enumerate}
  
-Using the best subset selection is one of the better ways of deciding the most efficient predictors of a given dataset, however going through all outcomes this way, takes a lot of computation power. Using formula \ref{fo:BestSubsetCalculationAmounts}, the amount of computations can be calculated for each calculation of $M_k$.
+Using the best subset selection is one of the better ways of deciding the most efficient predictors of a given dataset, however going through all outcomes this way, takes a lot of computation power. Using formula \ref{fo:BestSubsetCalculationAmounts}, the amount of computations can be calculated for each calculation of $M_k$. if all possibilities are tested, the amount of computations becomes $\sim 2^p$.
 \begin{align}\label{fo:BestSubsetCalculationAmounts}
 	\begin{pmatrix}
 		p \\ k
@@ -24,7 +24,7 @@ LAB 6.5.1
 
 \section{Forward/Backward Stepwise Selection}
 \subsection{Theory}
-Forward and backward stepwise selection are pretty similar, the difference is whether to start the model with no predictors (Forward) or to start the model with all predictors (Backward).
+Forward and backward stepwise selection are pretty similar, the difference is whether to start the model with no predictors (Forward) or to start the model with all predictors (Backward). These two methods are not guaranteed to yield the best model containing a subset of the $p$ predictors, unlike the best subset selection, but their computations are far more efficient than best subset selection.
 
 \textbf{Forward stepwise selection}, begins with a model containing no predictors, and then stepwise adds predictors to the model, however for each step the variable that gives the greatest additional improvement the fit is added. This means that not every single combination of $k$ predictors are analyzed, instead only one additional predictor at $k$ step is added to the already decided $k-1$ predictors, from the steps beforehand. Going through the forward stepwise selection:
 \begin{enumerate}
@@ -37,11 +37,21 @@ Forward and backward stepwise selection are pretty similar, the difference is wh
 	\item Select a single best model from among $M_0,\dots,M_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$. 
 \end{enumerate}
 
-\textbf{Backward stepwise selection}, is 
+The amount of computations is given by $1+p+(p-1)+\dots+(p-k)$. If all possibilities are tested, the amount of computations becomes $\sim p^2$. This is an advantage over the best subset selection with $\sim 2^p$.
+
+\textbf{Backward stepwise selection}, has a lot of similarities to the forward stepwise selection, just in reverse. Instead of starting with null model, this method start with the full least squares model containing all $p$ predictors. This backward stepwise selection have the same advantages as forward stepwise selection over the best subset selection. Going through the backward stepwise selection:
+
+\begin{enumerate}
+	\item Let $M_p$ denote the full least squares model, containing all $p$ predictors.
+	\item For $k=p,p-1,\dots,1$:
+	\begin{enumerate}
+		\item Consider all $k$ models that contain all but one predictor in $M_k$, adding up to a total of $k-1$ predictors.
+		\item Choose the best among these $k$ models, and call it $M_{k-1}$. Here best is defined as having smallest RSS or highest $R^2$.
+	\end{enumerate}
+	\item Select a single best model from among $M_0,\dots,M_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$. 
+\end{enumerate}
+
+If all possibilities are tested, the amount of computations becomes $\sim p^2$, just like the forward stepwise selection method. This is an advantage over the best subset selection with $\sim 2^p$.
 
 \subsection{Results}
 LAB 6.5.2
-
-\section{Hybrid Methods}
-\subsection{Theory}
-\subsection{Results}
