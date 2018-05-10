@@ -19,7 +19,7 @@ The formula for Ridge regression can be seen in \ref{fo:RidgeRegression}. In blu
 
 \noindent The penalty term only apply to the slope, not the intercept. $\lambda$ in in \ref{fo:RidgeRegression} control the degree of penalty.
 \begin{align}\label{fo:RidgeRegression}
-\color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2  \color{red} \lambda \sum_{j=1}^{p} \beta^2_j 
+\color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2 \color{black} + \color{red} \lambda \sum_{j=1}^{p} \beta^2_j 
 \end{align}
 The reason to Ridge regression over least squares is found in the bias-variance
 trade-off. This is because as our $\lambda$ gets bigger the complexity of the ridge regression fit decreases leading to less variance but more bias.
