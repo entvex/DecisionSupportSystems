@@ -27,7 +27,7 @@ trade-off. This is because as our $\lambda$ gets bigger the complexity of the ri
 \subsection{The lasso regression}
 The formula for least absolute shrinkage and selection operator, also called Lasso, can be seen in figure \ref{foTheLasso}. The blue part of the equation is the RSS (the ) and the red part is the penalty. The lasso regression has a advantage over Ridge regression because of the way the penalty term works. In Ridge it will include all $p_i$ predictors because the $\lambda \sum_{j=1}^{p} \beta^2_j$ only shrink all of the coefficients towards zero but not setting any of them to zero. In lasso we use as E \_ 1 norm of a coefficient vector $\beta$ is given by $ \lVert \beta_1 \rVert = \sum | \beta_j |$ which makes some of the coefficient estimates to be exactly zero when the tuning parameter $\lambda$ is large enough.
 \begin{align}\label{fo:TheLasso}
-\color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2  \color{red} \lambda \sum_{j=1}^{p} |\beta_j|
+\color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2 \color{black} +  \color{red} \lambda \sum_{j=1}^{p} |\beta_j|
 \end{align}
 Because the lasso regression removes some of the coefficients, lasso models are generally easier to understand than Ridge regression ones because they are  more sparse with a reduced complexity. Lasso models involve only a subset of the variables. As before selecting a good $\lambda$ is again important here.
 
