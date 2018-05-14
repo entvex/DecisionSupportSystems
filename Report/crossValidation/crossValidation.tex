@@ -1,6 +1,16 @@
 \chapter{Cross Validation} \label{ch:crossValidation}
-
 Cross validation is used for evaluation the model. The cross validation is better for example residuals. The reason is that with the residuals they do not give an indication how well the model will predict with the new data that it did not sow. One way to avoid this problem is to divide the data in several peace, in this case some data can be removed from training set to validate the model. This is the basic idea of cross validation. The cross validation best use is when we do not have test or validation data set or we have a small sample. There is several possibilities how can we perform cross validation some of them will be described below.
+
+\section {Bias Variance trade off}
+The Bias variance trade off is an important part of supervised learning and not done right accuracy of the model will not perform well. We would like a model that that capture the structure of the data but also works well on unseen data and we can't get both. A model with high variance represent the training data well, but are at risk of overfitting hence also capturing the noise in training data. On the other hand models with high bias produce simpler models underfit their training data therefore failing to capture structure of the data.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{crossValidation/biasVariance}
+	\caption{}
+	\label{fig:biasvariance}
+\end{figure}
+
 \section {Validation set approach}
 \subsection{Theory}
 
