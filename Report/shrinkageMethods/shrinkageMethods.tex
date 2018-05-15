@@ -85,6 +85,13 @@ result = ridge.predict(X_test)
 metrics.mean_squared_error(y_test, result)
 134355.75204499933
 \end{lstlisting}
+Using a plot we can also see the trend here that the coefficients move toward zero.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{shrinkageMethods/fig/plot}
+	\caption{Ridge regression on the hitters dataset}
+	\label{fig:plot}
+\end{figure}
 In lab 6.6.2 we use The Lasso and the same steps to prepere the dataset as before. We need to select the best alpha and to do this we use LassoCV that has cross validation built ind.
 \begin{lstlisting}[language=Python]
 alphas = 10**np.linspace(100,-20,100)
@@ -102,9 +109,3 @@ HmRun         -0.000000
 Runs           0.000000
 -- omitted --
 \end{lstlisting}
-
-
-
-
-
-
