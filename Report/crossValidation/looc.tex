@@ -12,44 +12,11 @@ Repeating this method n times gives n squared errors, $MSE_1, . . . , MSE_n$. Th
 \begin{align}\label{fo:LOOCV}
 CV_{(n)} = \frac {1}{n} \sum_{k=1}^{K}  (\frac {y_i-\hat{y_i}}{1- h_i})^2
 \end{align}
-Leave one out cross validation has a some advantages over the validation set approach. It has far less bias. Because in LOOCV repeatedly fit the chosen learning method using training sets that contain n - 1 observations that is nearly as many as are in the entire data set. On the other hand the validation set approach training set is typically around half the size of the original data set hence LOOC won't overestimate the test error rate as much as the validation set approach would. The LOOCV will also give consistent results because there is no randomness in the training/testing set splits and is usefull when there is limited amount of data.
+Leave one out cross validation has a some advantages over the validation set approach. It has far less bias. Because in LOOCV repeatedly fit the chosen learning method using training sets that contain n - 1 observations that is nearly as many as are in the entire data set. On the other hand the validation set approach training set is typically around half the size of the original data set hence LOOVC won't overestimate the test error rate as much as the validation set approach would. The LOOCV will also give consistent results because there is no randomness in the training/testing set splits and is usefull when there is limited amount of data.
 
 \subsection{Result}
-In lab 3.4.2 we had the same auto data. We used the LOOCV method to find MSE. We made an algorithm for this method, because we coul not find a library for this method.
-
+In lab 3.4.2 the same Auto data as used in the validation Set Approach. Running the iteratively LOOCV process for different fits polynomial regressions for polynomials of 1 to 5 and displaying the associated cross-validation error. The output below shows see a drop in the estimated test MSE between the linear and quadratic fits. But using higher-order polynomials shows no clear improvement.
 \begin{lstlisting}[language=Python]
-X = df["horsepower"].values.reshape(-1,1)
-y = df["mpg"].values.reshape(-1,1) 
-
-loo = LeaveOneOut()
-print('Splits: ', loo.get_n_splits(X))
-
-ytests = []
-ypreds = []
-
-for train_index, test_index in loo.split(X):
-X_train, X_test = X[train_index], X[test_index]
-y_train, y_test = y[train_index], y[test_index]
-
-model = linear_model.LinearRegression()
-model.fit(X = X_train, y = y_train)
-y_pred = model.predict(X_test)
-
-ytests += list(y_test)
-ypreds += list(y_pred)
-
-rr = metrics.r2_score(ytests, ypreds)
-ms_error = metrics.mean_squared_error(ytests, ypreds)
-
-print("LOOCV results:")
-print("R^2: {:.5f}%, MSE: {:.5f}".format(rr*100, ms_error))
+24.23151351792922, 19.24821312448969, 19.334984064109666, 19.42443031091358, 19.0332089609506
 \end{lstlisting}
-
-The output:
-\begin{lstlisting}[language=Python]
-Splits:  392
-LOOCV results:
-R^2: 60.12110%, MSE: 24.23151
-\end{lstlisting}
-
-As we can see our algorithm has worked.Also we have seen a mass increased computing time in the machine. It was expected, because of retraining and revalidating the model 392 time.
+When running the LOOCV a mass increased computing time in the machine has seen and that was expected.
