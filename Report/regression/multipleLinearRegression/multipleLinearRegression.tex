@@ -21,10 +21,10 @@ RSE = \sqrt{\dfrac{1}{n-2}\cdot RSS}
 
 
 \subsection{Results}
-In lab 3.6.2 and 3.6.3 we use linear and multiple regression respectively, to test if there is a dependency between any of the values. The dataset tested on is housing values in suburbs of Boston\footnote{https://raw.github.com/vincentarelbundock/Rdatasets/master/csv/MASS/Boston.csv}.
+The lab 3.6.2 and 3.6.3 are using linear and multiple regression respectively, to test if there is a dependency between any of the values. The dataset tested on is housing values in suburbs of Boston\footnote{https://raw.github.com/vincentarelbundock/Rdatasets/master/csv/MASS/Boston.csv}.
 
 \subsubsection*{LAB 3.6.2}
-In this lab we make a linear regression on MEDV (\textit{Median value of owner-occupied homes in \$1000's}) and LSTAT (\textit{Lower status of the population}). Starting off by making a scatter plot of the data to observe how the data look compared to each other.
+In the lab 3.6.2 was made a linear regression on MEDV (\textit{Median value of owner-occupied homes in \$1000's}) and LSTAT (\textit{Lower status of the population}). Starting off by making a scatter plot of the data to observe how the data look compared to each other.
 
 \begin{figure}[h]
 	\centering
@@ -33,13 +33,13 @@ In this lab we make a linear regression on MEDV (\textit{Median value of owner-o
 	\label{fig:bostonPairplotMdevLstat}
 \end{figure}
 
-On Figure \ref{fig:bostonPairplotMdevLstat} we can already see that making a simple linear regression on these data, might be stretching it. Still we continue and try making a linear regression.Resulting in the following output:
+The Figure \ref{fig:bostonPairplotMdevLstat} shows that making a simple linear regression on these data, might be stretching it, but to be sure the linear regression were made. Resulting in the following output:
 
 \noindent\textit{Intercept: 34.5538408794\\
 Coefficients: [-0.95004935]\\
 Variance score: 0.54\\}
 
-As we can see we have a variance score of 0.54, which tells us that the simple linear fit on these data isn't very precise. Making a scatter plot with the linear fit we can also visualize this observation.
+The variance score is 0.54, which says that the simple linear fit on these data isn't very precise. Making a scatter plot will help to visualize this observation.
 
 \begin{figure}[h]
 	\centering
@@ -48,10 +48,10 @@ As we can see we have a variance score of 0.54, which tells us that the simple l
 	\label{fig:bostonScatterplotMdevLstatLinreg}
 \end{figure}
 
-As we see on Figure \ref{fig:bostonScatterplotMdevLstatLinreg} both data points at the start and at the end is far away from the linear fit. We can conclude on both the variance and the observed data that there is some evidence of non-linearity.
+As the Figure \ref{fig:bostonScatterplotMdevLstatLinreg} shows both data points at the start and at the end is far away from the linear fit. The conclusion on both the variance and the observed data that there is some evidence of non-linearity.
 
 \subsubsection*{LAB 3.6.3}
-In this lab we continue working on the MDEV (Median value of owner-occupied homes in $\$1000's$) and LSTAT (\% lower status of the population) data, but also include AGE (\textit{proportion of owner-occupied units built prior to 1940}) to the mix in order for us to make multiple linear regressions on these datasets. Once again we start of making a scatter plot of the data in order for us to observe the datasets compared to each other. This time taking a step further and get an approximate of the linear regression fit, as seen on Figure \ref{fig:bostonPairplotMdevLstatAge}.
+The lab 3.6.3 continuous working on the MDEV (Median value of owner-occupied homes in $\$1000's$) and LSTAT (\% lower status of the population) data, but also include AGE (\textit{proportion of owner-occupied units built prior to 1940}). First step is to make scatter plot of the data in order to visuals and observe the datasets compared to each other. This time taking a step further and get an approximate of the linear regression fit, as seen on Figure \ref{fig:bostonPairplotMdevLstatAge}.
 
 \begin{figure}[h]
 	\centering
@@ -60,13 +60,13 @@ In this lab we continue working on the MDEV (Median value of owner-occupied home
 	\label{fig:bostonPairplotMdevLstatAge}
 \end{figure}
 
-We then make a linear regression on the features and the response. Resulting in the following output:
+The linear regression were made on the features and the response. Resulting in the following output:
 
 \noindent\textit{Intercept: 33.2227605318\\
 	Coefficients: [('lstat', -1.0320685641826013), ('age', 0.034544338571646085)]\\
 	Variance score: 0.55\\}
 
-Once again we can see that the variance score is too low for us to assume linearity and therefore we once again conclude that there is some evidence of non-linearity.
+Once again the variance score is too low to assume linearity and therefore the conclusion is that there some evidence of non-linearity.
 
 \subsection{Conclusion}
 Linear regression is a good way of observing a dataset and checking if there is a linear or non-linear dependency between any of the data. However it is a very simple regression and has a hard time modeling complex data, where the data is not linearly correlated. Data without a linear correlation will result in a high variance, and a high deviation from the fit.
