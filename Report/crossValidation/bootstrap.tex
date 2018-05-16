@@ -2,7 +2,7 @@
 
 A second method for producing additional information from a limited data set is to use the bootstrap method. Bootstrap is performed by shaking up the data and plucking out random observations, while allowing for the same observation to be included multiple times, to create a new sample. The process can then be repeated as many times as needed until the desired amount of data becomes available. 
 
-\subsection{Theory}%TODO explain sample with redraw
+\subsection{Theory}
 
 \iffalse
 A good explanation https://stats.stackexchange.com/questions/26088/explaining-to-laypeople-why-bootstrapping-works
@@ -20,39 +20,28 @@ Bootstrapping works by resampling the initial data with replacement, until a new
 As an example, assuming we have a normally distributed population of N elements then by taking a random resampling from that dataset until a new dataset, also containing N elements, is gained. The mean of that new dataset can then be seen as an estimated new observation from the original population. We then repeat this process B times and in the end we have a new data set of both resampled means and variances. Since both were generated using the original set of observations the set of resamples will also be normally distributed with a mean and variance close to the original population.
 \fi
 
+To give an example of how bootstrap creates samples, see Figure \ref{fig:bootstrapDrawWithReplacement}. In the figure random observations are drawn from the estimated population (Original Data(Z)) with replacement. The amount of observations drawn per sample is the same amount as the observations of the estimated population. This creates bins of observations ($Z^{*1}, Z^{*2},\ldots,Z^{*B}$), from the estimated population, from which mean of the data X and Y are both calculated. The result is bootstrap samples ($\hat\alpha^{*1}, \hat\alpha^{*2}, \ldots, \hat\alpha^{*B}$).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{crossValidation/bootstrapDrawWithReplacement}
+	\caption{Bootstrap sample draw, with replacement.}
+	\label{fig:bootstrapDrawWithReplacement}
+\end{figure}
+
 The standard error of the resampled data can be estimated through the sample standard deviation, as seen in Equation \ref{fo:bootstrapStandardError}. $\hat{\theta}$ denotes the bootstrap data of the estimated population $\theta$. $\hat{\theta_{b}}$ where $b=1,\dots,B$ denotes each bootstrap dataset. $\bar{\theta}$ denotes the mean of the bootstrap data; $\bar{\theta} = \frac{1}{B} \sum_{b=1}^{B}(\hat{\theta_{b}})$.
 \begin{align}\label{fo:bootstrapStandardError}
 	SE(\hat{\theta}) = \sqrt{\frac{1}{B-1} \sum_{b=1}^{B}(\hat{\theta_{b}} - \bar{\theta})} 
 \end{align}
 
-%TODO What about uncorrelated sample population data?
+When working with more complex data, for example data that is not independent, but rather dependent on each other can create problems for the resampling methods of bootstrap. The solution to this problem is the Block Bootstrap alternative. Block Bootstrap does the same as the simple bootstrap mentioned earlier in this chapter, however before drawing samples from the estimated population, the data is put into smaller blocks, where the data is independent to each other. The block size is decided upon to maximize the amount of data that reside in a block, as well as minimizing the dependency between data in a single block.
 
-\subsection{Results}%TODO Rework
+\subsection{Results}
+\subsubsection*{LAB 5.3.4}
 
-Before starting the lab a couple of functions were defined. The one referred to in the results is $boot\_lm$ and is defined below. The function takes in a data set that will be used as the basis for the bootstrap, an $r\_formula$ for defining how the least squares regression should be calculated, and $B$ how many resamples should be taken.
+In lab 5.3.4 on Bootstrap a small data sample is taken and the bootstrapping method is used to increase the data quality. First to examine the process on the Portfolio data set, and then apply the method to the auto data set and review the results for linear and quadratic regression compared to the original.
 
-\begin{lstlisting}[language=Python]
-def boot_lm(data, r_formula, B):
-  # data the data to bootstrap
-  # r_formula the least squares regression R formula to use on the data
-  # B the number of iterations of bootstrapping
-  coef = []
-  for i in range(0, B):
-    # Take a least squares regression of each resample using r_formula
-    v = formula.ols(r_formula, data=data.sample(frac=1.0, replace=True)).fit()
-    coef.append(v.params)
-  return coef
-\end{lstlisting}
-
-In lab 5.3.4. on Bootstrap we will take a small-ish data sample and use the bootstrapping method to increase the data quality. First to examine the process on the Portfolio data set, and then apply the method to the auto data set and review the results for linear and quadratic regression compared to the original.
-
-\begin{lstlisting}[language=Python]
-# Calculate linear regression on original data.
-  original_auto = formula.ols("mpg \sim horsepower", data=auto_data).fit() 
-# Create the bootstrap data set.
-  bootstrap_auto = pd.DataFrame(boot_lm(auto_data, "mpg \sim horsepower", 1000)) 
-\end{lstlisting}
-We then run the code and print out the mean and error for the intercept and horsepower.
+The resulting mean and error for the intercept and horsepower.
 \begin{lstlisting}[language=Python]
 original params
   Intercept:  mean:  39.9358610212
@@ -66,16 +55,10 @@ Bootstrapped params
   horsepower: error: 0.000244810973842
 \end{lstlisting}
 
-For the linear regression we get a very similar means for both the Intercept and horsepower, while the RSE has dropped sharply for both the intercept and horsepower. This shows that the original estimates of the parameters were quite good as most of the error in the estimate can be explained by noise in the data and not $\epsilon_i$ as the regression formula assumes.
+For the linear regression very similar means for both the Intercept and horsepower are found, while the RSE has dropped sharply for both the intercept and horsepower. This shows that the original estimates of the parameters were quite good as most of the error in the estimate can be explained by noise in the data and not $\epsilon_i$ as the regression formula assumes.
 
-For the end of the exercise we will run the same code, but using a quadratic term. This time the fit to the data is very good and we see similar results as the error drops by a factor of $\sim30$.
+For the end of the exercise the same code will be run, but using a quadratic term. This time the fit to the data is very good and we see similar results as the error drops by a factor of $\sim30$.
 
-\begin{lstlisting}[language=Python]
-# Calculate quadratic regression on the original data
-  quad_auto = formula.ols("mpg ~ horsepower + np.power(horsepower, 2)", data=auto_data).fit()
-# Create the bootstrap data set.
-  bootstrap_quad_auto = pd.DataFrame(boot_lm(auto_data, "mpg ~ horsepower + np.power(horsepower, 2)", 1000))
-\end{lstlisting}
 \begin{lstlisting}[language=Python]
 original params
  Intercept:  mean:               56.9000997021
