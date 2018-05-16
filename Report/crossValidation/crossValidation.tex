@@ -13,7 +13,7 @@ The Validation set approach works by splitting the data to two parts one is call
 
 \subsection{Result}
 \subsubsection*{LAB 5.3.1}%TODO write full lab
-In lab 5.3.1 the validation set approach is used to find the MSE. This laboratory exercise uses the "Auto" dataset\footnote{https://raw.github.com/vincentarelbundock/Rdatasets/master/csv/ISLR/Auto.csv}.
+In lab 5.3.1 the validation set approach is used to find estimate the test error that result from fitting linear models on the Auto data\footnote{https://raw.github.com/vincentarelbundock/Rdatasets/master/csv/ISLR/Auto.csv} set.
 
 Then we are fiting linear model on our training set and testing our model with the test data.
 
@@ -38,9 +38,20 @@ As we can see we are starting to reach the overfilling line with the cubic Polyn
 \subsection{Theory}
 This type of cross validation is used when there is limited amount of data. It works the same way as k-fold cross validation, but instead subset we are using signal data entry, that means K is N in this case.The mathematic formula is below. 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{crossValidation/LOOCV}
+	\caption{}
+	\label{fig:loocv}
+\end{figure}
+
+
 \begin{align}\label{fo:LOOCV}
 CV_{(n)} = \frac {1}{n} \sum_{k=1}^{K}  (\frac {y_i-\hat{y_i}}{1- h_i})^2
 \end{align}
+
+
+
 \subsection{Result}
 In lab 3.4.2 we had the same auto data. We used the LOOCV method to find MSE. We made an algorithm for this method, because we coul not find a library for this method.
 
