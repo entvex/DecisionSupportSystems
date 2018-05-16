@@ -7,7 +7,7 @@ The best subset selection is a selection method trying all outcomes with the dif
 	\item Last step, select a single best model from among $M_0,\dots,M_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$.
 \end{enumerate}
  
-Using the best subset selection is one of the better ways of deciding the most efficient predictors of a given dataset, however going through all outcomes this way, takes a lot of computation power. Using formula \ref{fo:BestSubsetCalculationAmounts}, the amount of computations can be calculated for each calculation of $M_k$. if all possibilities are tested, the amount of computations becomes $\sim 2^p$.
+Using the best subset selection is one of the better ways of deciding the most efficient predictors of a given dataset, however going through all outcomes this way, takes a lot of computation power. Using formula \ref{fo:BestSubsetCalculationAmounts}, the amount of computations can be calculated for each calculation of $M_k$. if all possibilities are tested, the amount of computations becomes $O(2^p)$.
 \begin{align}\label{fo:BestSubsetCalculationAmounts}
 	\begin{pmatrix}
 		p \\ k
@@ -20,6 +20,7 @@ The best subset selection method can also lead to overfitting and high variance 
 These two reasons make stepwise methods a very attractive alternative, to best subset selection. 
 
 \subsection{Results}
+\subsubsection*{LAB 6.5.1}%TODO Rewrite, remove "we"
 In Lab 6.5.1, we look at baseball player data, and want to predict their salary on the basis of various statistics associated with their performance in the previous year. In this lab we start off by removing the data that insufficient data. Then because we are using python, we have to define some formulas to calculate the RSS and best subset selection algorithm, these have been found on another git repository\footnote{\cite{Xu2017}}.
 
 The result of the subset selection on the data can be seen on Figure \ref{fig:bestSubsetSelection} with an RSS value on the graph on the left, and Adjusted $R^2$ on the graph on the right. Observe that the Adjusted $R^2$ graph starts to decay the higher the  amount of predictors, after approximately 10 predictors. Theory behind this in Section \ref{sc:estimatingTestError} Estimating Test Error Using Mallow's Cp, AIC, BIC and Adjusted R-squared, on page \pageref{sc:estimatingTestError}.
@@ -48,7 +49,7 @@ Forward and backward stepwise selection are pretty similar, the difference is wh
 	\item Select a single best model from among $M_0,\dots,M_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$. 
 \end{enumerate}
 
-The amount of computations is given by $1+p+(p-1)+\dots+(p-k)$. If all possibilities are tested, the amount of computations becomes $\sim p^2$. This is an advantage over the best subset selection with $\sim 2^p$.
+The amount of computations is given by $1+p+(p-1)+\dots+(p-k)$. If all possibilities are tested, the amount of computations becomes $O(p^2)$. This is an advantage over the best subset selection with $O(2^p)$.
 
 \textbf{Backward stepwise selection}, has a lot of similarities to the forward stepwise selection, just in reverse. Instead of starting with null model, this method start with the full least squares model containing all $p$ predictors. This backward stepwise selection have the same advantages as forward stepwise selection over the best subset selection. Going through the backward stepwise selection:
 
@@ -62,9 +63,10 @@ The amount of computations is given by $1+p+(p-1)+\dots+(p-k)$. If all possibili
 	\item Select a single best model from among $M_0,\dots,M_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$. 
 \end{enumerate}
 
-If all possibilities are tested, the amount of computations becomes $\sim p^2$, just like the forward stepwise selection method. This is an advantage over the best subset selection with $\sim 2^p$.
+If all possibilities are tested, the amount of computations becomes $O(p^2)$, just like the forward stepwise selection method. This is an advantage over the best subset selection with $O(2^p)$.
 
 \subsection{Results}
+\subsubsection*{LAB 6.5.2}
 In Lab 6.5.2, we continue to look at baseball players and try to predict their salary on the basis of various statistics associated with their performance in the previous year. We use the same procedure to prepare the data and once again define some functions to calculate RSS and use the forward and backward stepwise selection method.
 
 After calculating forward and backward stepwise selection two methods give two different results. On Figure \ref{fig:forwardBackwardStepwiseSelectionRSS} the two methods have been illustrated and it is easy to see that the results are different even though they are closely related. Do we look at what the two different methods got as predictors at $k=3$ we see that forward stepwise selection chose the three predictors "Hits", "CRBI" and "Division\_W", where backward stepwise selection chose "Hits", "CRuns" and "PutOuts".

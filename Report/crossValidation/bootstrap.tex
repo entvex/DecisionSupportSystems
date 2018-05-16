@@ -2,7 +2,7 @@
 
 A second method for producing additional information from a limited data set is to use the bootstrap method. Bootstrap is performed by shaking up the data and plucking out random observations, while allowing for the same observation to be included multiple times, to create a new sample. The process can then be repeated as many times as needed until the desired amount of data becomes available. 
 
-\subsection{Theory}
+\subsection{Theory}%TODO explain sample with redraw
 
 \iffalse
 A good explanation https://stats.stackexchange.com/questions/26088/explaining-to-laypeople-why-bootstrapping-works
@@ -20,14 +20,14 @@ Bootstrapping works by resampling the initial data with replacement, until a new
 As an example, assuming we have a normally distributed population of N elements then by taking a random resampling from that dataset until a new dataset, also containing N elements, is gained. The mean of that new dataset can then be seen as an estimated new observation from the original population. We then repeat this process B times and in the end we have a new data set of both resampled means and variances. Since both were generated using the original set of observations the set of resamples will also be normally distributed with a mean and variance close to the original population.
 \fi
 
-The standard error of the resampled data can be estimated through the sample standard deviation, as seen in Equation \ref{fo:bootstrapStandardError}. $\hat{\theta}$ denotes the bootstrap data of the estimated population $\theta$. $\hat{\theta_{b}}$ where $b=1,\dots,B$ denotes each bootsrap dataset. $\bar{\theta}$ denotes the mean of the bootstrap data; $\bar{\theta} = \frac{1}{B} \sum_{b=1}^{B}(\hat{\theta_{b}})$.
+The standard error of the resampled data can be estimated through the sample standard deviation, as seen in Equation \ref{fo:bootstrapStandardError}. $\hat{\theta}$ denotes the bootstrap data of the estimated population $\theta$. $\hat{\theta_{b}}$ where $b=1,\dots,B$ denotes each bootstrap dataset. $\bar{\theta}$ denotes the mean of the bootstrap data; $\bar{\theta} = \frac{1}{B} \sum_{b=1}^{B}(\hat{\theta_{b}})$.
 \begin{align}\label{fo:bootstrapStandardError}
 	SE(\hat{\theta}) = \sqrt{\frac{1}{B-1} \sum_{b=1}^{B}(\hat{\theta_{b}} - \bar{\theta})} 
 \end{align}
 
-%TODO What about uncorrelated sample population data? What about using bootstrap to estimate prediction error?
+%TODO What about uncorrelated sample population data?
 
-\subsection{Results}
+\subsection{Results}%TODO Rework
 
 Before starting the lab a couple of functions were defined. The one referred to in the results is $boot\_lm$ and is defined below. The function takes in a data set that will be used as the basis for the bootstrap, an $r\_formula$ for defining how the least squares regression should be calculated, and $B$ how many resamples should be taken.
 

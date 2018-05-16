@@ -1,8 +1,8 @@
-\section{Estimating Test Error Using Mallow's Cp, AIC, BIC and Adjusted R-squared}\label{sc:estimatingTestError}
-One approach is to estimate test error indirectly, by computing the test error and then adjust it to the training error to overcome the problem of overfitting. The techniques discussed in this section will be Mallow's $C_p$, Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC) and Adjusted $R^2$.
+\section{Estimating Test Error Using Mallow's Cp, AIC, BIC and Adjusted R-squared}\label{sc:estimatingTestError}%TODO rework intro
+One approach to estimate test error indirectly, by computing the test error and then adjust it to the training error to overcome the problem of overfitting. The techniques discussed in this section will be Mallow's $C_p$, Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC) and Adjusted $R^2$.
 
 \subsection{Theory}
-\textbf{Mallow's $C_p$}: The formula for Mallow's $C_p$ is given on formula \ref{fo:MallowsCp}, where $d$ is the total amount of predictors and $\hat{\sigma}^2$ is an estimate of the variance of the error $\epsilon$ associated with each response measurement. The smaller the result of $C_p$ is, the lower the test error. 
+\textbf{Mallow's $C_p$}: The formula for Mallow's $C_p$ is given on formula \ref{fo:MallowsCp}, where $d$ is the total amount of predictors and $\hat{\sigma}^2$ is an estimate of the variance of the error $\epsilon$ associated with each response measurement. The smaller the result of $C_p$, the lower the test error. 
 
 \begin{align}\label{fo:MallowsCp}
 	C_p = \dfrac{1}{n} (RSS + 2 d \hat{\sigma}^2)
@@ -14,7 +14,7 @@ One approach is to estimate test error indirectly, by computing the test error a
 	AIC = -2 \log L + 2 \cdot d
 \end{align}
 
-In case of using AIC on a linear model, the equation becomes formula \ref{fo:AICLinear}. In this case the AIC and $C_p$ are proportional to each other, resulting in having the same smallest number at a given number of predictors. The end result is that these two methods will point to the same amount of predictors being the most efficient. This is only given for linear models, and AIC will be a better approach for other kinds of models.
+In case of using AIC on a linear model, the equation becomes formula \ref{fo:AICLinear}. In this case the AIC and $C_p$ are proportional to each other, resulting in having the same smallest number at a given number of predictors. The end result is that these two methods will point to the same amount of predictors being the most efficient. This is only given for linear models however, and AIC will be a better approach, than $C_p$, for other kinds of models.
  
 \begin{align}\label{fo:AICLinear}
 	AIC_{Linear} = \dfrac{RSS}{\hat{\sigma}^2} + 2 \cdot d
@@ -34,9 +34,10 @@ Like $C_p$ the smaller the result of BIC, the lower the test error. The BIC meth
 	\text{Adjusted } R^2 &= 1 - \dfrac{RSS/(n-d-1)}{TSS/(n-1)}
 \end{align}
 
-Another approach to estimating test error, is to estimate test error directly using a validation set approach or cross-validation. The technique discussed in Chapter \ref{ch:crossValidation} Cross Validation, on page \pageref{ch:crossValidation}, and will only be mentioned briefly here. The Cross-validation technique can be utilized to estimate the test error of models by splitting the original sample, into a training set to train the model and a test set to evaluate the model. Compared to using Mallow's Cp, AIC, BIC and Adjusted R-squared, this technique does not require a estimate of the test error neither the error variance, which can be very problematic especially in non-linear models.
+Another approach to estimating test error, is to estimate test error directly using a validation set approach or cross-validation. The technique discussed in Chapter \ref{sc:crossValidation} Cross Validation, on page \pageref{sc:crossValidation}, and will only be mentioned briefly here. The Cross-validation technique can be utilized to estimate the test error of models by splitting the original sample, into a training set to train the model and a test set to evaluate the model. Compared to using Mallow's Cp, AIC, BIC and Adjusted R-squared, this technique does not require a estimate of the test error neither the error variance, which can be very problematic to find especially in non-linear models.
 
 \subsection{Results}
+\subsubsection*{LAB 6.5.3}%TODO rewrite
 In Lab 6.5.3, we continue to look at baseball players and try to look at the test error when predicting, the salary of the players, on the basis of various statistics associated with their performance in the previous year. We use the same procedure to prepare the data and define some functions to calculate RSS and to perform both validation set and cross-validation approaches.
 
 Making the Validation set on both best subset and forward stepwise selection gives the results seen on Figure \ref{fig:validatedBestSubsetAndForwardStepwise}. The cross-validation method gives the results on Figure \ref{fig:crossValidationRSS}, with $k=10$.
