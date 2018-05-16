@@ -10,6 +10,15 @@ In some cases, using LDA can be insufficient, since in some cases the data won't
 
 Where $\Sigma_{k}$ is a covariance matrix for the \textit{k}th class. Under this assumption, the Bayes classifier assigns an observation $X = x$ to the class for which $\sigma_k$ is largest.
 
+On Figure \ref{fig:linearContraQuadratic} two examples are shown. One using LDA versus QDA on a linear model ($\Sigma_{1} = \Sigma_{2}$), and one using LDA versus QDA on a non-linear model ($\Sigma_{1} \neq \Sigma_{2}$).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{discriminantAnalysis/quadraticDiscriminantAnalysis/fig/linearContraQuadratic}
+	\caption{Purple dash indicate the Bayes, blue dots indicate the LDA, green lines indicate the QDA. On the left the Bayes decision boundary is linear ($\Sigma_{1} = \Sigma_{2}$). On the right the Bayes decision boundary is non-linear ($\Sigma_{1} \neq \Sigma_{2}$)}
+	\label{fig:linearContraQuadratic}
+\end{figure}
+
 \subsection{Results}
 \subsubsection*{LAB 4.6.4}
 In lab 4.6.4 Quadratic Discriminant Analysis. We split our data as in lab 4.6.2 the data is split into before and after 2005, a training and testing set.
