@@ -21,7 +21,7 @@ These two reasons make stepwise methods a very attractive alternative, to best s
 
 \subsection{Results}
 \subsubsection*{LAB 6.5.1}%TODO Rewrite, remove "we"
-In Lab 6.5.1, we look at baseball player data, and want to predict their salary on the basis of various statistics associated with their performance in the previous year. In this lab we start off by removing the data that insufficient data. Then because we are using python, we have to define some formulas to calculate the RSS and best subset selection algorithm, these have been found on another git repository\footnote{\cite{Xu2017}}.
+The Lab 6.5.1 is looking at baseball player data, and want to predict their salary on the basis of various statistics associated with their performance in the previous year. Some data has to be removed, because of insufficient. Also it has to define some formulas to calculate the RSS and best subset selection algorithm, these have been found on another git repository\footnote{\cite{Xu2017}}.
 
 The result of the subset selection on the data can be seen on Figure \ref{fig:bestSubsetSelection} with an RSS value on the graph on the left, and Adjusted $R^2$ on the graph on the right. Observe that the Adjusted $R^2$ graph starts to decay the higher the  amount of predictors, after approximately 10 predictors. Theory behind this in Section \ref{sc:estimatingTestError} Estimating Test Error Using Mallow's Cp, AIC, BIC and Adjusted R-squared, on page \pageref{sc:estimatingTestError}.
 
@@ -67,9 +67,9 @@ If all possibilities are tested, the amount of computations becomes $O(p^2)$, ju
 
 \subsection{Results}
 \subsubsection*{LAB 6.5.2}
-In Lab 6.5.2, we continue to look at baseball players and try to predict their salary on the basis of various statistics associated with their performance in the previous year. We use the same procedure to prepare the data and once again define some functions to calculate RSS and use the forward and backward stepwise selection method.
+The Lab 6.5.2  continues to look at baseball players and try to predict their salary on the basis of various statistics associated with their performance in the previous year. The procedure is the same as before for preparing the data, define some functions to calculate RSS and use the forward and backward stepwise selection method.
 
-After calculating forward and backward stepwise selection two methods give two different results. On Figure \ref{fig:forwardBackwardStepwiseSelectionRSS} the two methods have been illustrated and it is easy to see that the results are different even though they are closely related. Do we look at what the two different methods got as predictors at $k=3$ we see that forward stepwise selection chose the three predictors "Hits", "CRBI" and "Division\_W", where backward stepwise selection chose "Hits", "CRuns" and "PutOuts".
+After calculating forward and backward stepwise selection two methods give two different results. On Figure \ref{fig:forwardBackwardStepwiseSelectionRSS} the two methods have been illustrated and it is easy to see that the results are different even though they are closely related. It is noticeable that forward stepwise selection chose the three predictors "Hits", "CRBI" and "Division\_W", where backward stepwise selection chose "Hits", "CRuns" and "PutOuts".
 
 \begin{figure}[h]
 	\centering
