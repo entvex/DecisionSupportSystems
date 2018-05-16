@@ -16,12 +16,8 @@ Leave one out cross validation has a some advantages over the validation set app
 
 \subsection{Result}
 In lab 3.4.2 we had the same Auto data as we used in the validation Set Approach. We used the LOOCV method to find MSE. 
-
-The output:
+Running the iteratively LOOCV process for different fits polynomial regressions for polynomials of 1 to 5 and displaying the associated cross-validation error. The output below shows see a drop in the estimated test MSE between the linear and quadratic fits. But using higher-order polynomials shows no clear improvement.
 \begin{lstlisting}[language=Python]
-Splits:  392
-LOOCV results:
-R^2: 60.12110%, MSE: 24.23151
+24.23151351792922, 19.24821312448969, 19.334984064109666, 19.42443031091358, 19.0332089609506
 \end{lstlisting}
-
-As we can see our algorithm has worked.Also we have seen a mass increased computing time in the machine. It was expected, because of retraining and revalidating the model 392 time.
+When running the LOOCV a mass increased computing time in the machine has seen and that was expected.
