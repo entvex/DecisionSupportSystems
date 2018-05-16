@@ -24,7 +24,7 @@ As an example; assume $\beta_0 = -10 $ and $ \beta_1 = 0.4 $, using the equation
 
 \subsection{Results}
 \subsubsection*{LAB 4.6.1 and 4.6.2}
-In lab 4.6.1 and 4.6.2 we look at stock market data and we will try to predict if the market goes up or down base on the Daily percentage returns for stock index between 2001 and 2005.
+The lab 4.6.1 and 4.6.2 uses stock market data and trying to predict if the market goes up or down base on the Daily percentage returns for stock index between 2001 and 2005.
 Displaying the data to get a sense of it:
 \begin{Verbatim}[commandchars=\\\{\}]
 {\color{outcolor}Out[{\color{outcolor}183}]:}    Year   Lag1   Lag2   Lag3   Lag4   Lag5  Volume  Today Direction
@@ -49,7 +49,7 @@ To get the accuracy of the model we take the mean of data we predicted correctly
 
 To create and validate a model, the data is split into two parts, a train set (all before 2005) and a test set (all after 2005). This gives the possibility of using cross-validation, when the model has been trained using the train set.
 
-After the model have been trained, detailed information about the fit can be observed. A negative for the Lag1 coefficient tell us that if the market had a positive return yesterday, then it is less likely to go up today. But because the P value kind of big still there is no real evidence of good association between Lag1 and Direction.
+After the model have been trained, detailed information about the fit can be observed. A negative for the Lag1 coefficient tells that if the market had a positive return yesterday, then it is less likely to go up today. But because the P value kind of big still there is no real evidence of good association between Lag1 and Direction.
 
 \begin{lstlisting}[language=Python]
                 coef      std err       z        P>|z|      [0.025       0.975]

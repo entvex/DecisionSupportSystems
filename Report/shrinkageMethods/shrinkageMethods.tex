@@ -38,76 +38,63 @@ From equations \ref{fo:RidgeRegression} and \ref{fo:TheLasso} we see that a Lass
 
 \section{Results}
 \subsubsection*{LAB 6.6.1}%TODO rework lab
-In lab 6.6.1 we use Ridge Regression on the hitters dataset. We use scikit-lean and their implmeation. After loading the data we found that some players had missing salary, therefor these were dropped. The data also contained some string values and usingf'' pandas we have converted them into dummy variables.  
+Lab 6.6.1 uses Ridge Regression on the hitters dataset. Using scikit-lean and their implementation. Some players were missing salary, therefor these were dropped out. The data also contained some string values and using pandas they were converted  into dummy variables.  
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{shrinkageMethods/fig/data.png}
 	\caption{The data after removing missing values and making strings into dummy variables }
 	\label{fig:lab661_data}
 \end{figure}
-Then we split our data into a training and test set and we try to run Ridge Regression with a alpha of 4 and display our mean squared error.
-\begin{lstlisting}[language=Python]
-ridge = Ridge(alpha=4)
-ridge.fit(X_train, y_train)
-result = ridge.predict(X_test)
-metrics.mean_squared_error(y_test, result)
-134512.83820473132
-\end{lstlisting}
-After that we display some of the coefficients.
-\begin{lstlisting}[language=Python]
-pd.Series(ridge.coef_.flatten(), index=X.columns)
-AtBat          -2.185390
-Hits            7.392346
-HmRun          -2.666724
-\end{lstlisting}
-If we run the same code again but with a alpha that is very large $10^10$ then are coefficients get even smaller.
-\begin{lstlisting}[language=Python]
-AtBat          5.135079e-04
-Hits           1.771301e-04
-HmRun          2.568334e-05
--- omitted --
-\end{lstlisting}
-And our MSE also gets even higher.
-\begin{lstlisting}[language=Python]
-211698.60251243794
-\end{lstlisting}
-As discussed in the theory and see just before picking the right alpha part of this is important. We will now use cross validation to pick the best alpha using scikit learn's RidgeCV. That is Ridge regression with built-in cross-validation.
-\begin{lstlisting}[language=Python]
-alphas = 10**np.linspace(100,-4,1000)
-ridgecv = RidgeCV(alphas=alphas, scoring='neg_mean_squared_error')
-ridgecv.fit(scale(X_train), y_train)
-ridgecv.alpha_
-2.3570694139967037
-\end{lstlisting}
-Now we will use the alpha we found using  cross validation and check our result.
-\begin{lstlisting}[language=Python]
-ridge = Ridge(2.3570694139967037)
-ridge.fit(X_train, y_train)
-result = ridge.predict(X_test)
-metrics.mean_squared_error(y_test, result)
-134355.75204499933
-\end{lstlisting}
-Using a plot we can also see the trend here that the coefficients move toward zero.
+The data were spited into a training and test set. Then it ran Ridge Regression with a alpha of 4 and displayed mean squared error.
+
+
+\noindent\textit{MSE= 134512.83820473132}
+
+Afterwards displayed some coefficients.
+
+\noindent\textit{AtBat  -2.185390}
+
+\noindent\textit{Hits    7.392346}
+
+\noindent\textit{HmRun  -2.666724}
+
+If the same code would be run again but with a alpha that is very large $10^10$ then are coefficients get even smaller.
+
+\noindent\textit{AtBat  5.135079e-04}
+
+\noindent\textit{Hits    1.771301e-04}
+
+\noindent\textit{HmRun  2.568334e-05}
+
+And  MSE also gets even higher.
+
+\noindent\textit{MSE= 211698.60251243794}
+
+As discussed in the theory and see just before picking the right alpha part of this is important.The cross validation is used to find the best alpha using scikit learn's RidgeCV. That is Ridge regression with built-in cross-validation. Which has displayed 
+
+\noindent\textit{2.3570694139967037}
+
+After finding the best alpha using the cross validation the code was ran again with the new alpha.   
+
+\noindent\textit{134355.75204499933}
+
+Using a plot it is also seen that trends coefficients move toward zero.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{shrinkageMethods/fig/plot}
 	\caption{Ridge regression on the hitters dataset}
 	\label{fig:plot}
 \end{figure}
-In lab 6.6.2 we use The Lasso and the same steps to prepere the dataset as before. We need to select the best alpha and to do this we use LassoCV that has cross validation built ind.
-\begin{lstlisting}[language=Python]
-alphas = 10**np.linspace(100,-20,100)
-lassoCV = LassoCV(alphas=alphas)
-lassoCV.fit(X_train, y_train)
-lassoCV.alpha_
-1072.2672220103254
-\end{lstlisting}
-As we can see some of the coefficients here are zero just as we described in the theory section.
-\begin{lstlisting}[language=Python]
-pd.Series(lassoCV.coef_.flatten(), index=X.columns)
-AtBat          0.729684
-Hits           0.000000
-HmRun         -0.000000
-Runs           0.000000
--- omitted --
-\end{lstlisting}
+Lab 6.6.2 uses The Lasso and the same steps to prepare the dataset as before. In Lasso there is a need to find best alpha and the fastest way is to use LassoCV that has cross validation built ind.
+
+\noindent\textit{1072.2672220103254}
+
+Also some of the coefficients are displayed, some of them are zero just as described in the theory section.
+
+\noindent\textit{AtBat          0.729684}
+
+\noindent\textit{Hits           0.000000}
+
+\noindent\textit{HmRun         -0.000000}
+
+\noindent\textit{Runs           0.000000}
