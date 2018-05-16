@@ -1,5 +1,5 @@
 \section{Cross Validation} \label{sc:crossValidation}
-Cross validation is a technique for model validation. A model is normally trained on parts of a dataset and later another part of the dataset of unknown data will be tested against the model. With cross validation the aim is to use the the training set in the model in the training to limit problems like overfitting and help gain insight on how the model will behave to a never seen before dataset. There is several options for Cross Validation. The following sections will describe Validation set approach, Leave one out cross validation and K-fold what is the techniques used here.
+Cross validation is a technique for model validation. A model is normally trained on parts of a dataset and later another part of the dataset of unknown data will be tested against the model. With cross validation the aim is to use the the training set in the model in the training to limit problems like overfitting and help gain insight into how the model will behave to a never seen before dataset. There is several options for Cross Validation. The following sections will describe Validation set approach, Leave one out cross validation and K-fold what is the techniques used here.
 
 \section{Validation set approach}
 \subsection{Theory}
@@ -13,28 +13,23 @@ The Validation set approach works by splitting the data to two parts one is call
 
 \subsection{Result}
 \subsubsection*{LAB 5.3.1}%TODO write full lab
-In lab 5.3.1 the validation set approach is used to find estimate the test error that result from fitting linear models on the Auto data\footnote{https://raw.github.com/vincentarelbundock/Rdatasets/master/csv/ISLR/Auto.csv} set.
-
-Then we are fiting linear model on our training set and testing our model with the test data.
-
-
-As we can see below the MSE is quit high.
+In lab 5.3.1 the validation set approach is used to find estimate the test error that result from fitting linear models on the Auto data\footnote{https://raw.github.com/vincentarelbundock/Rdatasets/master/csv/ISLR/Auto.csv} set. First thing is to split the Auto dataset into a training by taking 196 random samples out of the data and use the rest for the testing. We train the model and get the following MSE
 \begin{lstlisting}
 23.36190289258723
 \end{lstlisting}
-We can reduce the MSE with polynomial or cubic regression.
-
-The out put:
+The MSE looks high so a way to reduce the MSE could be with a polynomial 
 \begin{lstlisting}[language=Python]
 --------Test Error for 2nd order--------
 20.25269085835005
+\end{lstlisting}
+Cubic regression.
+\begin{lstlisting}[language=Python]
 --------Test Error for 3rd order--------
 20.325609365773605
 \end{lstlisting}
-As we can see we are starting to reach the overfilling line with the cubic Polynomial. 
+By reviewing the results it is clear that the MSE for the models with linear, quadratic, and cubic terms are 23.36, 20.25, and 20.33.
 
 \section {Leave one out cross validation}
-
 \subsection{Theory}
 This type of cross validation is used when there is limited amount of data. It works the same way as k-fold cross validation, but instead subset we are using signal data entry, that means K is N in this case.The mathematic formula is below. 
 
