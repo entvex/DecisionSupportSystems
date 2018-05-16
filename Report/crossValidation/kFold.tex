@@ -1,41 +1,25 @@
 \section {K-fold cross validation}%TODO explain in more detail (give pictures)
 \subsection{Theory}
-In this type of cross validation the split the data k-subsets and we repeat validation set approach for k times. In each time we take one subest as a test set and other combine are training set. After all copulations we compute average error. The advantage of this method is that all data points are one time in the testing set. The drift of the test is reduced when k is increasing. We can choose the k value, most oftenly k values are 5 or 10 . The disadvantages is that we have to retrain the model k times and the computation time increases. The mathematic formula is below. 
+In this type of cross validation the data is split into k-subsets and the validation set approach is repeated k times. The cross validation will then be performed using each of the k subsets as the validation set and the other k-1 sets are combined and used as the training set. This method has several advantages over simple cross validation as there is less variance in the test error estimate without being much more computationally complex, only requiring the learning method to be run K times. The cross validation parameter is given by calculating the average MSE for each fold as seen in Formula \ref{fo:k-fold}. 
+
+An important aspect of K-fold cross validation is the selection of the k parameter, in practicce $k=5$ or $k=10$ is sufficient, as higher values of k lead to increased computation time and more variance in the estimated MSE, as the validation set becomes smaller. A special case of K-fold CV will be discussed in the following chapter where K = n, also known as leave one out cross validation.
+
 \begin{align}\label{fo:k-fold}
 CV_{(K)} = \sum_{k=1}^{K}  \frac {n_{k}}{n}MSE_{(k)}
 \end{align}
 
 \subsection{Result}
 \subsubsection*{LAB 5.3.3}%TODO write full lab
-In the lab 5.3.3 we used K-fold cross validation find the MSE. We are using auto data from the book. In this particular case we are using k = 10. 
-\begin{lstlisting}[language=Python]
-from sklearn.model_selection import KFold
+In lab 5.3.3 the objective is to use K-fold validation to get a better estimate for the MSE in the Auto dataset. For the estimate $K=10$ will be used and the results of each run tallied, and in the end $R^2$ and MSE were derived.
 
-X = Data["horsepower"].values.reshape(-1,1) 
-y = Data["mpg"].values.reshape(-1,1)
-kf= KFold()
-kf.n_splits = 10
+Import data and mark the column horsepower as X and mpg as y. Then split the data into 10 folds.
+\begin{lstlisting}[language=Python]
+('Splits: ', 10)
 \end{lstlisting}
-Now we need to make a loop for all the folds to calculate MSE.   
+
+Then each fold will be left out in turn, and the model fit 10 times and the results stored. After all 10 runs the MSE and $R^2$ can be estimated.
 
 \begin{lstlisting}[language=Python]
-ytests = []
-ypreds = []
-
-for train_index, test_index in kf.split(Data):
-	X_train, X_test = X[train_index], X[test_index]
-	y_train, y_test = y[train_index], y[test_index]
-
-	model = linear_model.LinearRegression()
-	model.fit(X = X_train, y = y_train)
-	y_pred = model.predict(X_test)  
-	ypreds += list(y_pred)
-	ytests += list(y_test)
-	ms_error = metrics.mean_squared_error(ytests, ypreds)
-	print("%.2f" %ms_error, end=" ")
+R^2: 54.87992%, MSE: 27.41619
 \end{lstlisting}
-Out put of the code is:
-\begin{lstlisting}[language=Python]
-28.35 22.79 24.14 23.95 22.29 21.56 20.92 21.16 26.11 27.42 
-\end{lstlisting}
-Having all MSE we can choose the best model from the results. or 
+

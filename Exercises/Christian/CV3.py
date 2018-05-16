@@ -5,17 +5,10 @@ Created on Mon Mar 12 20:21:42 2018
 @author: cml
 """
 
-import matplotlib.pyplot as plt
 import numpy as np
-from sklearn import datasets, linear_model
+from sklearn import linear_model
 from sklearn.metrics import mean_squared_error, r2_score
-import numpy as np
 import pandas as pd
-import statsmodels.api as sm
-import statsmodels.formula.api as smf
-from patsy import dmatrices
-from sklearn.model_selection import LeaveOneOut
-from sklearn import metrics
 from sklearn.model_selection import KFold # import KFold
 
 df = pd.read_csv('Auto.csv', usecols=range(1,10))
@@ -44,8 +37,8 @@ for train_index, test_index in kf.split(X):
     ytests += list(y_test)
     ypreds += list(y_pred)
     
-rr = metrics.r2_score(ytests, ypreds)
-ms_error = metrics.mean_squared_error(ytests, ypreds)
+rr = r2_score(ytests, ypreds)
+ms_error = mean_squared_error(ytests, ypreds)
 
 print("KFOLD results:")
 print("R^2: {:.5f}%, MSE: {:.5f}".format(rr*100, ms_error))

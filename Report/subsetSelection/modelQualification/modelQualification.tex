@@ -1,5 +1,5 @@
-\section{Estimating Test Error Using Mallow's Cp, AIC, BIC and Adjusted R-squared}\label{sc:estimatingTestError}%TODO rework intro
-One approach to estimate test error indirectly, by computing the test error and then adjust it to the training error to overcome the problem of overfitting. The techniques discussed in this section will be Mallow's $C_p$, Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC) and Adjusted $R^2$.
+\section{Estimating Test Error Using Mallow's Cp, AIC, BIC and Adjusted R-squared}\label{sc:estimatingTestError}
+When using subset selection methods there is one key component needed, a method for qualitatively select which model is best, using either RSS or $R^2$ is not possible as that would lead to overfitting, instead the test error needs to be estimated, as that is the true indicator of the quality of the model. The techniques discussed in this section will be Mallow's $C_p$, Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC) and Adjusted $R^2$.
 
 \subsection{Theory}
 \textbf{Mallow's $C_p$}: The formula for Mallow's $C_p$ is given on formula \ref{fo:MallowsCp}, where $d$ is the total amount of predictors and $\hat{\sigma}^2$ is an estimate of the variance of the error $\epsilon$ associated with each response measurement. The smaller the result of $C_p$, the lower the test error. 
