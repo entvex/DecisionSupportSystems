@@ -1,25 +1,18 @@
 \section {Leave one out cross validation}
 \subsection{Theory}
 The Leave one out cross validation works a lot like Validation set approach but instead of spliting the data set into two subsets of
-similar size, a single observation $(x_1, y_1)$ is used for the validation
-set, and the remaining observations ${(x_2, y_2), . . . , (x_n, y_n)}$make up the
-training set.
-
-This type of cross validation is used when there is limited amount of data. It works the same way as k-fold cross validation, but instead subset we are using signal data entry, that means K is N in this case.The mathematic formula is below. 
-
+similar size, a single observation $(x_1, y_1)$ is used for the testing set and the remaining observations ${(x_2, y_2), . . . , (x_n, y_n)}$ make up the training set and repeat this process as seen in Figure \ref{fig:loocv}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{crossValidation/LOOCV}
 	\caption{}
 	\label{fig:loocv}
 \end{figure}
-
-
+Repeating this method n times gives n squared errors, $MSE_1, . . . , MSE_n$. The LOOCV estimate for the test MSE is the average of these n test error as shown in equation \ref{fo:LOOCV}.
 \begin{align}\label{fo:LOOCV}
 CV_{(n)} = \frac {1}{n} \sum_{k=1}^{K}  (\frac {y_i-\hat{y_i}}{1- h_i})^2
 \end{align}
-
-
+Leave one out cross validation has a some advantages over the validation set approach. It has far less bias. Because in LOOCV repeatedly fit the chosen learning method using training sets that contain n - 1 observations that is nearly as many as are in the entire data set. On the other hand the validation set approach training set is typically around half the size of the original data set hence LOOC won't overestimate the test error rate as much as the validation set approach would. The LOOCV will also give consistent results because there is no randomness in the training/testing set splits and is usefull when there is limited amount of data.
 
 \subsection{Result}
 In lab 3.4.2 we had the same auto data. We used the LOOCV method to find MSE. We made an algorithm for this method, because we coul not find a library for this method.
