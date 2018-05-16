@@ -1,4 +1,10 @@
 \chapter{Resampling Methods}
 \input{biasVarianceTradeOff/biasVarianceTradeOff}
-\input{crossValidation/crossValidation}
+
+\section{Cross Validation} \label{sc:crossValidation}
+Cross validation is a technique for model validation. A model is normally trained on parts of a dataset and later another part of the dataset of unknown data will be tested against the model. With cross validation the aim is to use the the training set in the model in the training to limit problems like overfitting and help gain insight into how the model will behave to a never seen before dataset. There is several options for Cross Validation. The following sections will describe Validation set approach, Leave one out cross validation and K-fold what is the techniques used here.
+
+\input{crossValidation/validationSetApproach}
+\input{crossValidation/kFold}
+\input{crossValidation/looc}
 \input{crossValidation/bootstrap}

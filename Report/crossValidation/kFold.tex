@@ -1,0 +1,41 @@
+\section {K-fold cross validation}%TODO explain in more detail (give pictures)
+\subsection{Theory}
+In this type of cross validation the split the data k-subsets and we repeat validation set approach for k times. In each time we take one subest as a test set and other combine are training set. After all copulations we compute average error. The advantage of this method is that all data points are one time in the testing set. The drift of the test is reduced when k is increasing. We can choose the k value, most oftenly k values are 5 or 10 . The disadvantages is that we have to retrain the model k times and the computation time increases. The mathematic formula is below. 
+\begin{align}\label{fo:k-fold}
+CV_{(K)} = \sum_{k=1}^{K}  \frac {n_{k}}{n}MSE_{(k)}
+\end{align}
+
+\subsection{Result}
+\subsubsection*{LAB 5.3.3}%TODO write full lab
+In the lab 5.3.3 we used K-fold cross validation find the MSE. We are using auto data from the book. In this particular case we are using k = 10. 
+\begin{lstlisting}[language=Python]
+from sklearn.model_selection import KFold
+
+X = Data["horsepower"].values.reshape(-1,1) 
+y = Data["mpg"].values.reshape(-1,1)
+kf= KFold()
+kf.n_splits = 10
+\end{lstlisting}
+Now we need to make a loop for all the folds to calculate MSE.   
+
+\begin{lstlisting}[language=Python]
+ytests = []
+ypreds = []
+
+for train_index, test_index in kf.split(Data):
+	X_train, X_test = X[train_index], X[test_index]
+	y_train, y_test = y[train_index], y[test_index]
+
+	model = linear_model.LinearRegression()
+	model.fit(X = X_train, y = y_train)
+	y_pred = model.predict(X_test)  
+	ypreds += list(y_pred)
+	ytests += list(y_test)
+	ms_error = metrics.mean_squared_error(ytests, ypreds)
+	print("%.2f" %ms_error, end=" ")
+\end{lstlisting}
+Out put of the code is:
+\begin{lstlisting}[language=Python]
+28.35 22.79 24.14 23.95 22.29 21.56 20.92 21.16 26.11 27.42 
+\end{lstlisting}
+Having all MSE we can choose the best model from the results. or 
