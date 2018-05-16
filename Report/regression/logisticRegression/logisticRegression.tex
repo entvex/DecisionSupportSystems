@@ -30,7 +30,7 @@ Displaying the data to get a sense of it:
 {\color{outcolor}Out[{\color{outcolor}183}]:}    Year   Lag1   Lag2   Lag3   Lag4   Lag5  Volume  Today Direction
 1  2001  0.381 -0.192 -2.624 -1.055  5.010  1.1913  0.959        Up
 \end{Verbatim}
-Because the classifier only works with digits the Today Direction column is changed into a number and split the data set into a y and X.
+Since some of the headers are not very clearly named, a quick search to find out what they specify. Each $LagX$ denotes the percentage return $X$ days earlier, that is an indicator of the state of the market $X$ days before Today.The remaining unclear fields would be Volume, Volume of shares traded in billions, Today, percentage return for today, and Direction, whether the day had a positive or negative return. Because the classifier only works with digits the Today Direction column is changed into a number and split the data set into a y and X.
 
 Now that y and X is established using the statsmodels library a logistic regression can be made and fit to the model. Then assign Direction[Up] as a $1$ and $0$ as Direction[Down].
 
