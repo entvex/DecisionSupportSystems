@@ -1,20 +1,10 @@
 \section{Cross Validation} \label{sc:crossValidation}
-Cross validation is a technique for model validation. In this section, we instead consider a class of methods that estimate the
-test error rate by holding out a subset of the training observations from the
-fitting process, and then applying the statistical learning method to those
-held out observations
-
-
-
- There is several options for Cross Validation and Validation set approach, of them will be described in this chapter.
-
-
-
+Cross validation is a technique for model validation. A model is normally trained on parts of a dataset and later another part of the dataset of unknown data will be tested against the model. With cross validation the aim is to use the the training set in the model in the training to limit problems like overfitting and help gain insight on how the model will behave to a never seen before dataset. There is several options for Cross Validation. The following sections will describe Validation set approach, Leave one out cross validation and K-fold what is the techniques used here.
 
 \section{Validation set approach}
 \subsection{Theory}
-The Validation set approach works by splitting the data to two parts one is called the training set and the other is called the testing set(validation or hold-out set). An example of the split can be seen on Figure \ref{fig:validationsetapproach}. The model is tested with the training set, after the training is finished the model is tested with the testing set, which the model was not trained on. This test produces a test error, in the form of MSE, which is good for validating the model. The pros of this method is low computation time, but the results of this method is heavily depended on which data point will end up in the sets. 
-\begin{figure}
+The Validation set approach works by splitting the data to two parts one is called the training set and the other is called the testing set(validation or hold-out set). An example of the split can be seen on Figure \ref{fig:validationsetapproach}. The model is trained with the training set, after the training is finished the model is tested with the testing set, which the model was not trained on. This test produces a test error, in the form of MSE, which is good for validating the model. The advantage of this method is low computation time, but the results of this method is depended on which data points will end up in the sets. 
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.4\linewidth]{crossValidation/validationSetApproach}
 	\caption{Validation set approach. The entire dataset is split randomly into a training and testing set.}
