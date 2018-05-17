@@ -1,22 +1,20 @@
 \chapter*{Glossary}
 
-
 \begin{table}[H]
 	\centering
 	\begin{tabularx}{\linewidth}{|l|l|X|}
 		\hline
 		\textbf{Abbreviation} 	& \textbf{Term} 					& \textbf{Description} 		\\ \hline
-		RSS 					& Residual Sum of Squares			& Derp \\ \hline
-		RSE 					& Residual Standard Error			& Derp \\ \hline
-		MSE 					& Mean Square Error					& Derp \\ \hline
-		LDA 					& Linear Discriminant Analysis		& Derp \\ \hline
-		QDA 					& Quadratic Discriminant Analysis	& Derp \\ \hline
-		PDF						& Probability Density Functions		& Derp \\ \hline
-		AIC						& Akaike Information Criterion		& Derp \\ \hline
-		BIC						& Bayesian Information Criterion	& Derp \\ \hline
-		TSS						& Total Sum of Squares				& Derp \\ \hline
-		WCV						& Within-Cluster Variation			& Derp \\ \hline
+		RSS 					& Residual Sum of Squares			& The sum of the residuals squared, that is the deviations from the predicted curve to the actual values of data. A smaller RSS indicates a tight fit to the model, while a large RSS points to a more loosely one. \\ \hline
+		RSE 					& Residual Standard Error			& A estimation of the parameter $\sigma$. It is defined as RSE = $\sqrt{RSS/n-2}$. We assume that the residuals are Guassion with a mean of 0 and a standard deviation $\sigma$. If the residual SE is 0, then our model fits our data perfectly, but may be overfitted.  \\ \hline
+		MSE 					& Mean Square Error					& An estimator to measure the average of the squared errors. The errors are the distances between the linear regression line (predictions) and the actual value. By squaring we remove negative sign values and provide more weight to greater differences. Used to get the test error of an estimation. \\ \hline
+		LDA 					& Linear Discriminant Analysis		& A classification technique used to find a linear combination of features that can be used to divide and separate observations into multiple classes of a lower-dimensional space. \\ \hline
+		QDA 					& Quadratic Discriminant Analysis	& Similar to LDA, but with the assumption that a covariance matrix can be different for each class. Thus the discriminant function will have a quadratic term, as the matrix for each class is included. QDA tends to fit data better because of the added flexibility, but estimates more parameters. \\ \hline
+		PDF						& Probability Density Functions		& A function that models the density of probability of a continuous random variable \textit{X}. For some interval P(a < X < b) it tells us the probability that X falls in that interval. \\ \hline
+		AIC						& Akaike Information Criterion		& An estimator used the estimate the quality of multiple statistical models relative to each other. It uses the maximum value of the likelihood function to estimate an AIC value of each model and the one with the lowest AIC is preferred. \\ \hline
+		BIC						& Bayesian Information Criterion	& A criterion for model selection given a finite set of models. It introduces a penalty term for the number of parameters in a model to reduce complexity or likely overfitting.\\ \hline
+		TSS						& Total Sum of Squares				& Given a set of observations, the total sum of squares is the sum of the squared differences between the dependent variable $y_i $ and its mean $y^{hat}$. \\ \hline
+		WCV						& Within-Cluster Variation			& A property of data clustering that measures how tightly grouped the clusters are. In Kmeans, if we increase \textit{K}, we will decrease WCV, but increase the between-cluster variation. \\ \hline
 	\end{tabularx}
-	\caption{Glossary.}
 	\label{tab:glossary}
 \end{table}
