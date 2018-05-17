@@ -8,7 +8,7 @@ Agglomerative states that each observation starts in its own cluster and with ea
 
 A common metric is the Euclidean distance:
 \begin{align}
-	d(a,b) = \sqrt{\sum (a_{i} - b_{i})^{2}}  %TODO Christian did you done goof in equation 7.4? with the underlined 2
+	d(a,b) = \sqrt{\sum_{in=1}^{n} (a_{i} - b_{i})^{2}}  %TODO Christian did you done goof in equation 7.4? with the underlined 2
 \end{align}
 
 Which is the straight-line distance between two points in Euclidean space (\textit{n}-space with \textit{n}-tuples of real numbers). Between two points \textit{a} and \textit{b} given by ($X_a$, $Y_a$) and ($X_b$, $Y_b$) the Euclidean distance d(a,b) is:
