@@ -1,5 +1,5 @@
 \section{Logistic Regression}\label{sc:logisticRegression}
-We sometimes want to classify a response variable that has two classes. Examples of such classes could be being accepted or rejected into school or the market going up or down. Therefor our target class Y should be seen as a binary class. Where $0$ suggest Reject (Negative Class) and $1$ suggest Accept (Positive Class).
+We sometimes want to classify a response variable that has two classes. Examples of such classes could be being accepted or rejected into school or the market going up or down. Therefore our target class Y should be seen as a binary class. Where $0$ suggest Reject (Negative Class) and $1$ suggest Accept (Positive Class).
 \subsection{Theory}
 So we want to model the probability of the default class. If we are modeling people’s gender as male or female based on their shoe size, then the first class could be male and could be written as the probability of male given a person’s shoe size.
 \begin{align}
@@ -13,14 +13,16 @@ We then use the logistic function seen in \ref{fo:LogisticFunction} because it w
 \begin{align}\label{fo:LogisticFunction}
 P(x) = \dfrac{ e^{\beta_0 + \beta_1 X}}{  1 + e^{\beta_0 + \beta_1 X}}
 \end{align}
-If we move things a little (The $e$ can be removed from one side by adding a natural logarithm $ln$ to the other) we get Equation \ref{fo:logit}. Here we can see that it still a linear model, but we are modeling the probabilities on a non-linear scale. The ratio on the left in the equation is called log odds of the default class. This is calculated as a ratio of the probability of the event divided by the probability of not the event, e.g. $\frac{0.5}{1-0.5}$ which has the odds of $1$.
+If we move things a little (the $e$ can be removed from one side by adding a natural logarithm $ln$ to the other) we get Equation \ref{fo:logit}. Here we can see that it still a linear model, but we are modeling the probabilities on a non-linear scale. The ratio on the left in the equation is called log odds of the default class. This is calculated as a ratio of the probability of the event divided by the probability of not the event, e.g. $\frac{0.5}{1-0.5}$ which has the odds of $1$.
  \begin{align}\label{fo:logit}
 \log\bigg( \dfrac{ P(X)}{1-P(x)} \bigg) = \beta_0 + \beta_1 X
 \end{align}
 
 As an example; assume $\beta_0 = -10 $ and $ \beta_1 = 0.4 $, using the equations as defined above, plug in the numbers and find the probability of "male" given the shoe size of 24 defined as $P(x) = P(gender=male|ShoeSize=24)$ resulting in $P(x) = \dfrac{ e^{-10 + 0.4*24}}{1 + e^{-10 + 0.4*24}} = 0.40$, $0.4$ probability. A threshold can be created for our binary classifier $0$ if $p(male) < 0.5$ and $1$ if $ p(male) >= 0.5$
 
-%TODO Maximum Likelihood p. 132 in book
+To estimate the regression coefficients of the model in 2.8 we use a technique called maximum likelihood. The goal is to find $\beta_0$ and $\beta_1$, such that when estimating $P(x)$, the result corresponds as closely as possible to the observed individual data of gender given a shoe size. So your coefficients should yield a number close to 0 if the person is not male and a number close to 1 if the person is male. We determine these coefficients by maximizing the likelihood function.
+
+%TODO: If someone can do the maximum likelihood function in latex, please feel free.
 
 \subsection{Results}
 \subsubsection*{LAB 4.6.1 and 4.6.2}
