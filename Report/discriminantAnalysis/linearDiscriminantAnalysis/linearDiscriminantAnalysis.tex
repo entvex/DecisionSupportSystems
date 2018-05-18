@@ -1,7 +1,7 @@
 \section{Linear Discriminant Analysis}
-Using Linear Discriminant Analysis\footnote{\cite{James2013} p. 138} (LDA) we can overcome several problems with logistic regression. When the classes are well-separated, the parameter estimates for the logistic regression model are unstable. If our sample size is small and the distribution of the predictors X is a normal distribution in each of the classes, the linear discriminant model is more applicable than the logistic regression model.
+Using Linear Discriminant Analysis\footnote{\cite{James2013} p. 138} (LDA) one can overcome several problems with logistic regression. When the classes are well-separated, the parameter estimates for the logistic regression model are unstable. If our sample size is small and the distribution of the predictors X is a normal distribution in each of the classes, the linear discriminant model is more applicable than the logistic regression model.
 \subsection{Theory}
-Before we start using LDA there is a  assumption about the data it operates on. Each of the predictors should be normally distributed. The formula used by LDA is shown in Equation \ref{fo:BayesTheorem}. Where $\pi_k$ is the prior probability that a randomly selected observation comes from the $k$'th class. $f_k(x)$ is the probability density function of X for an observation that comes from the $k$'th class. If the result is large then there is a high probability that an observation is predicted to be in the $k$'th class.
+Before one start using LDA there is a  assumption about the data it operates on. Each of the predictors should be normally distributed. The formula used by LDA is shown in Equation \ref{fo:BayesTheorem}. Where $\pi_k$ is the prior probability that a randomly selected observation comes from the $k$'th class. $f_k(x)$ is the probability density function of X for an observation that comes from the $k$'th class. If the result is large then there is a high probability that an observation is predicted to be in the $k$'th class.
 \begin{align}\label{fo:BayesTheorem}
 Pr(Y=k|X=x) = \frac{\pi_k f_k(x)}{ \sum_{l=1}^{k}\pi_l f_l(x) }
 \end{align}
@@ -24,9 +24,9 @@ In the example seen in Figure \ref{fig:TwoOneDimensionalNormalDensityFunctions}\
 
 \subsection{Results}
 \subsubsection*{LAB 4.6.3}
-The lab 4.6.3\footnote{Appendix 5 - 4.6.3 Linear Discriminant Analysis} is using LDA. As shown in lab 4.6.2 the data is split into before and after 2005, a training and testing set. Afterwards the Linear Discriminant Analysis is imported from scikit-learn.
+The lab 4.6.3\footnote{Appendix 5 - 4.6.3 Linear Discriminant Analysis} is using LDA. As shown in lab 4.6.2 the data is split into before and after 2005, a training and testing set. Afterwards the LDA is imported from scikit-learn.
 
-Now that the model have been fitted we will look at the coefficients of the model for Lag1 and Lag2.
+Now that the model have been fitted it will look at the coefficients of the model for Lag1 and Lag2.
 
 \noindent\textit{Lag1: $-0.05544078$\\
 Lag2: $-0.0443452$}
