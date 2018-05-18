@@ -9,7 +9,7 @@ or we could say we are modeling the probability that the input (X) belongs to ou
 \begin{align}\label{fo:probability}
 P(x) = P(Y=1|X)
 \end{align}
-We then use the logistic function seen in \ref{fo:LogisticFunction} because it will give outputs between $0$ and $1$ for all values of X and will always produce an S-shaped curve.%TODO Add S-Curve here example p. 131
+We then use the logistic function seen in Equation \ref{fo:LogisticFunction} because it will give outputs between $0$ and $1$ for all values of X and will always produce an S-shaped curve.%TODO Add S-Curve here example p. 131
 \begin{align}\label{fo:LogisticFunction}
 P(x) = \dfrac{ e^{\beta_0 + \beta_1 X}}{  1 + e^{\beta_0 + \beta_1 X}}
 \end{align}
@@ -20,7 +20,7 @@ If we move things a little (the $e$ can be removed from one side by adding a nat
 
 As an example; assume $\beta_0 = -10 $ and $ \beta_1 = 0.4 $, using the equations as defined above, plug in the numbers and find the probability of "male" given the shoe size of 24 defined as $P(x) = P(gender=male|ShoeSize=24)$ resulting in $P(x) = \dfrac{ e^{-10 + 0.4*24}}{1 + e^{-10 + 0.4*24}} = 0.40$, $0.4$ probability. A threshold can be created for our binary classifier $0$ if $p(male) < 0.5$ and $1$ if $ p(male) >= 0.5$
 
-To estimate the regression coefficients of the model in 2.8 we use a technique called maximum likelihood. The goal is to find $\beta_0$ and $\beta_1$, such that when estimating $P(x)$, the result corresponds as closely as possible to the observed individual data of gender given a shoe size. So your coefficients should yield a number close to 0 if the person is not male and a number close to 1 if the person is male. We determine these coefficients by maximizing the likelihood function.
+To estimate the regression coefficients of the model in Equation \ref{fo:logit} we use a technique called maximum likelihood. The goal is to find $\beta_0$ and $\beta_1$, such that when estimating $P(x)$, the result corresponds as closely as possible to the observed individual data of gender given a shoe size. So your coefficients should yield a number close to 0 if the person is not male and a number close to 1 if the person is male. We determine these coefficients by maximizing the likelihood function.
 
 %TODO: If someone can do the maximum likelihood function in latex, please feel free.
 
@@ -32,7 +32,7 @@ Displaying the data to get a sense of it:
 {\color{outcolor}Out[{\color{outcolor}183}]:}    Year   Lag1   Lag2   Lag3   Lag4   Lag5  Volume  Today Direction
 1  2001  0.381 -0.192 -2.624 -1.055  5.010  1.1913  0.959        Up
 \end{Verbatim}
-Since some of the headers are not very clearly named, following is a quick explanation\footnote{https://rdrr.io/cran/ISLR/man/Smarket.html}. Each $LagX$ denotes the percentage return $X$ days earlier, that is an indicator of the state of the market $X$ days before Today.The remaining unclear fields would be Volume, Volume of shares traded in billions, Today, percentage return for today, and Direction, whether the day had a positive or negative return. Because the classifier only works with digits the Today Direction column is changed into a number and split the data set into a y and X.
+Since some of the headers are not very clearly named, following is a quick explanation\footnote{https://rdrr.io/cran/ISLR/man/Smarket.html}. Each $LagX$ denotes the percentage return $X$ days earlier, that is an indicator of the state of the market $X$ days before Today. The remaining unclear fields would be Volume, Volume of shares traded in billions, Today, percentage return for today, and Direction, whether the day had a positive or negative return. Because the classifier only works with digits the Today Direction column is changed into a number and split the data set into a y and X.
 
 Now that y and X is established using the statsmodels library a logistic regression can be made and fit to the model. Then assign Direction[Up] as a $1$ and $0$ as Direction[Down].
 

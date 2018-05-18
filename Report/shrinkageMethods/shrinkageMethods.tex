@@ -15,17 +15,16 @@ A norm is a function that gives a positive length to each vector in a vector spa
 \end{figure}
 
 \subsection{Ridge regression}
-The formula for Ridge regression can be seen in Formula \ref{fo:RidgeRegression}. The blue part represent the residual sum of square (RSS) term and the red part represent the regularize or penalty term. The penalty term is small when $\beta_1, \ldots ,\beta_p$ are close to zero and it has the effect of shrinking or penalizing the estimates of the coefficients $\beta_j$ towards zero. $\lambda$ also called a tuning parameter decides how much impact the two terms get. If $\lambda = 0$ then we will only get least squares estimates, but as $ \lambda \to \infty$ the penalty terms influence will increase and therefore the coefficients will approach zero. This means that the results will be different depending on the chosen $\lambda$ so for getting a good result picking the right $\lambda$ is important.
+The formula for Ridge regression can be seen in Equation \ref{fo:RidgeRegression}. The blue part represent the residual sum of square (RSS) term and the red part represent the regularize or penalty term. It is small when $\beta_1, \ldots ,\beta_p$ are close to zero and it has the effect of shrinking or penalizing the estimates of the coefficients $\beta_j$ towards zero. $\lambda$ also called a tuning parameter decides how much impact the two terms get. If $\lambda = 0$ then we will only get least squares estimates, but as $ \lambda \to \infty$ the penalty terms influence will increase and therefore the coefficients will approach zero. This means that the results will be different depending on the chosen $\lambda$ so for getting a good result picking the right $\lambda$ is important.
 
-\noindent The penalty term only apply to the slope, not the intercept. $\lambda$ in in \ref{fo:RidgeRegression} control the degree of penalty.
+\noindent The penalty term only apply to the slope, not the intercept. $\lambda$ in \ref{fo:RidgeRegression} control the degree of penalty.
 \begin{align}\label{fo:RidgeRegression}
 \color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2 \color{black} + \color{red} \lambda \sum_{j=1}^{p} \beta^2_j 
 \end{align}
-The reason to Ridge regression over least squares is found in the bias-variance
-trade-off. This is because as our $\lambda$ gets bigger the complexity of the ridge regression fit decreases leading to less variance but more bias.
+The reason to Ridge regression over least squares is found in the bias-variance trade-off. This is because as our $\lambda$ gets bigger the complexity of the ridge regression fit decreases leading to less variance but more bias.
 
 \subsection{The lasso regression}
-The formula for least absolute shrinkage and selection operator, also called Lasso, can be seen in Equation \ref{fo:TheLasso}. The blue part of the equation is the RSS and the red part is the penalty-term. The Lasso regression has a advantage over Ridge regression because of the way the penalty term works. In Ridge it will include all $p_i$ predictors because the $\lambda \sum_{j=1}^{p} \beta^2_j$ only shrink all of the coefficients towards zero. In lasso we use the $\ell_1$ norm, the coefficient vector $\beta$ is given by $ \lVert \beta_1 \rVert = \sum | \beta_j |$ which results in some of the coefficient estimates to be exactly zero, when the tuning parameter $\lambda$ is large enough.
+The equation absolute shrinkage and selection operator, also called Lasso, can be seen in Equation \ref{fo:TheLasso}. The blue part of the equation is the RSS and the red part is the penalty-term. The Lasso regression has a advantage over Ridge regression because of the way the penalty term works. In Ridge it will include all $p_i$ predictors because the $\lambda \sum_{j=1}^{p} \beta^2_j$ only shrink all of the coefficients towards zero. In lasso we use the $\ell_1$ norm, the coefficient vector $\beta$ is given by $ \lVert \beta_1 \rVert = \sum | \beta_j |$ which results in some of the coefficient estimates to be exactly zero, when the tuning parameter $\lambda$ is large enough.
 \begin{align}\label{fo:TheLasso}
 \color{blue} \sum_{i=1}^{n} ( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_i,j )^2 \color{black} +  \color{red} \lambda \sum_{j=1}^{p} |\beta_j|
 \end{align}
@@ -33,7 +32,7 @@ Because the lasso regression removes some of the coefficients, lasso models are 
 
 \subsection{Comparing ridge and lasso regression}
 
-From equations \ref{fo:RidgeRegression} and \ref{fo:TheLasso} we see that a Lasso regression model could potentially end up with less variables than Ridge regression, since the coefficients can be forced to equal zero, because of the $\ell_1$ penalty. This is called sparsity. You would typically use Ridge regression to prevent over-fitting, since it keeps all features, but can prove less useful with a large number of features (\textit{p} > \textit{n}). On the other hand, Lasso is useful when you have many features and provides you with a more sparse model that could give a computational advantage. Ridge regression generally performs better in terms of bias, variance and MSE when the predictors are related to the response. %However if the response is just a subset of the original predictors, we tend to get better results with Lasso regression.
+From Equations \ref{fo:RidgeRegression} and \ref{fo:TheLasso} a Lasso regression model could potentially end up with less variables than Ridge regression, since the coefficients can be forced to equal zero, because of the $\ell_1$ penalty. This is called sparsity. You would typically use Ridge regression to prevent over-fitting, since it keeps all features, but can prove less useful with a large number of features (\textit{p} > \textit{n}). On the other hand, Lasso is useful when you have many features and provides you with a more sparse model that could give a computational advantage. Ridge regression generally performs better in terms of bias, variance and MSE when the predictors are related to the response. %However if the response is just a subset of the original predictors, we tend to get better results with Lasso regression.
 %TODO Confusing conclussion
 
 \section{Results}
@@ -70,7 +69,7 @@ And  MSE also gets even higher.
 
 \noindent\textit{MSE= 211698.60251243794}
 
-As discussed in the theory and see just before picking the right alpha part of this is important.The cross validation is used to find the best alpha using scikit learn's RidgeCV. That is Ridge regression with built-in cross-validation. Which has displayed 
+As discussed in the theory and see just before picking the right alpha part of this is important. The cross validation is used to find the best alpha using scikit learn's RidgeCV. That is Ridge regression with built-in cross-validation. Which has displayed 
 
 \noindent\textit{2.3570694139967037}
 
@@ -81,7 +80,7 @@ After finding the best alpha using the cross validation the code was ran again w
 Using a plot it is also seen that trends coefficients move toward zero.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.45\linewidth]{shrinkageMethods/fig/plot}
+	\includegraphics[width=0.5\linewidth]{shrinkageMethods/fig/plot}
 	\caption{Ridge regression on the hitters dataset}
 	\label{fig:plot}
 \end{figure}

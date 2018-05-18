@@ -10,11 +10,11 @@ The goal of K-means clustering is to find good clusters with as small as possibl
 \begin{align}\label{fo:k-meansMini}
 \sum_{k=1}^{k} WCV(C_K)
 \end{align}
-To do this we need a distance metric. The one that is typically used is Euclidean distance, given by $d = \sqrt{ (x_2 - x_1)^2 - (y_2 - y_1)^2 } $. Which means the distance between two points is the length of the path connecting them or in other words the straight-line distance between two points in a plane. In Equation \ref{fo:EuclideanDistance1} $ |C_k| $ represent the number of observations in the \textit{k}'th cluster.
+To do this a distance metric were used. The one that is typically used is Euclidean distance, given by $d = \sqrt{ (x_2 - x_1)^2 - (y_2 - y_1)^2 } $. Which means the distance between two points is the length of the path connecting them or in other words the straight-line distance between two points in a plane. In Equation \ref{fo:EuclideanDistance1} $ |C_k| $ represent the number of observations in the \textit{k}'th cluster.
 \begin{align}\label{fo:EuclideanDistance1}
 WCV(C_K) = \dfrac{1}{|C_k|}  \sum_{i,i' \in C_k}   \sum_{j=1}^{p}(x_ij - x_{i'}j)^2
 \end{align}
-If we combine our two formulas given in \ref{fo:k-meansMini} and \ref{fo:EuclideanDistance2} we will get a optimization problem that defines K-means clustering. Were we try to minimize $ C_1,...,C_k $.
+Combine two equations \ref{fo:k-meansMini} and \ref{fo:EuclideanDistance2} the optimization problem emerged that defines K-means clustering . Were it try to minimize $ C_1,...,C_k $.
 \begin{align}\label{fo:EuclideanDistance2}
 \sum_{k=1}^{k} \dfrac{1}{|C_k|}  \sum_{i,i' \in C_k}   \sum_{j=1}^{p}(x_ij - x_i'j)^2
 \end{align}
@@ -25,7 +25,7 @@ The K-Means Clustering Algorithm works like this
 	\item Assign each observation to the nearest of the k clusters.
 	\item Move the centroids to the center of their clusters. The new position of each centroid is calculated as the average position of all the points in its cluster.
 \end{enumerate}
-We keep repeating steps 2 and 3 until the algorithm converges( centroid stop moving a lot at each iteration ).
+The algorithm  is repeating steps 2 and 3 until the centroid stop moving a lot at each iteration.
 
 \subsection{Results}
 \subsubsection*{LAB 10.5.1}
@@ -33,7 +33,7 @@ Lab 10.5.1\footnote{Appendix 15 - 10.5.1 K-Means Clustering} is using the k-mean
 
 Then running the K-means clustering with K = 2 and 20 iterations. As it can be seen output of the algorithm is a set of labels assigning each observation to one of the k groups. The way that these groups are made is by creating a centroid for each group. The centroids are the middle of the cluster and they capture the points closest to them and adds them to the cluster. The plot of this can be seen in figure \ref{fig:kmeansclusteringk2_20Iteration} on the right.
 
-Next we run the K-means clustering with K = 3 and 20 iterations. The plot of this can be seen in figure \ref{fig:kmeansclusteringk2_20Iteration} on the left.
+Next the K-means clustering runs with K = 3 and 20 iterations. The plot of this can be seen in Figure \ref{fig:kmeansclusteringk2_20Iteration} on the left.
 
 \begin{figure}[H]
 	\centering

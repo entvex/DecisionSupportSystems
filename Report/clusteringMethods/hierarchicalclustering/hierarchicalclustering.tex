@@ -4,14 +4,14 @@ With K-means clustering we had to predefine the number of clusters $K$. This can
 
 \subsection{Theory}
 
-Agglomerative states that each observation starts in its own cluster and with each iteration of the process are paired with other clusters as we move up the hierarchy.  This is based on a \textit{metric} criteria, a measure of distance between the pairs, and a \textit{linkage} criteria that indicate the dissimilarity between pairwise sets.
+Agglomerative states that each observation starts in its own cluster and with each iteration of the process are paired with other clusters as it moves up the hierarchy.  This is based on a \textit{metric} criteria, a measure of distance between the pairs, and a \textit{linkage} criteria that indicate the dissimilarity between pairwise sets.
 
 A common metric is the Euclidean distance:
 \begin{align}
-	d(a,b) = \sqrt{\sum_{in=1}^{n} (a_{i} - b_{i})^{2}}  %TODO Christian did you done goof in equation 7.4? with the underlined 2
+	d(a,b) = \sqrt{\sum_{in=1}^{n} (a_{i} - b_{i})^{2}}  
 \end{align}
 
-Which is the straight-line distance between two points in Euclidean space (\textit{n}-space with \textit{n}-tuples of real numbers). Between two points \textit{a} and \textit{b} given by ($X_a$, $Y_a$) and ($X_b$, $Y_b$) the Euclidean distance d(a,b) is:
+Which is a straight-line distance between two points in Euclidean space (\textit{n}-space with \textit{n}-tuples of real numbers). Between two points \textit{a} and \textit{b} given by ($X_a$, $Y_a$) and ($X_b$, $Y_b$) the Euclidean distance d(a,b) is:
 \begin{align}
 	d(a,b) = \sqrt{(X_a - X_b)^2 + (Y_a - Y_b)^2}
 \end{align}
@@ -32,7 +32,7 @@ The algorithmic steps for hierarchical clustering are:
 1. Start with \textit{N} clusters, one for each data point. \\
 2. Merge the clusters that are closest to each other. This gives \textit{N-1} clusters. \\
 3. Calculate the distance between the clusters using a linkage criteria (complete, single etc.) \\
-4. Repeat step 2 and 3 until we end up with one cluster with \textit{N} data points. The end result is a dendrogram picturing the distance (clusters) as a function of the observations (labels).
+4. Repeat step 2 and 3 until it ends up with one cluster with \textit{N} data points. The end result is a dendrogram picturing the distance (clusters) as a function of the observations (labels).
 
 \subsection{Results}
 \subsubsection*{LAB 10.5.2}
@@ -57,8 +57,6 @@ Lab 10.5.2\footnote{Appendix 16 - 10.5.2 Hierarchical Clustering} is using hiera
 \end{figure}
 
 \noindent Also in Figure \ref{fig:dendrogramcluster} is sowing that hierarchical clustering correctly identifies the lower left cluster and the lower right one, however with ward and average a significant euclidean distance has to be reached for it to split correctly, whereas complete splits the observations into two separate ones early on. 
-
-%TODO What is a ward Christian?
 
 
 

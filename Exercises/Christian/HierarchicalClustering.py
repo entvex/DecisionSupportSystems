@@ -4,7 +4,6 @@ Created on Sat Apr  7 15:32:15 2018
 
 @author: cml
 """
-
 from sklearn.cluster import KMeans
 from sklearn.cluster import AgglomerativeClustering
 from scipy.cluster import hierarchy

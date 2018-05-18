@@ -7,7 +7,7 @@ The best subset selection is a selection method trying all outcomes with the dif
 	\item Last step, select a single best model from among $M_0,\dots,M_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$.
 \end{enumerate}
  
-Using the best subset selection is one of the better ways of deciding the most efficient predictors of a given dataset, however going through all outcomes this way, takes a lot of computation power. Using formula \ref{fo:BestSubsetCalculationAmounts}, the amount of computations can be calculated for each calculation of $M_k$. if all possibilities are tested, the amount of computations becomes $O(2^p)$.
+Using the best subset selection is one of the better ways of deciding the most efficient predictors of a given dataset, however going through all outcomes this way, takes a lot of computation power. Using Equation \ref{fo:BestSubsetCalculationAmounts}, the amount of computations can be calculated for each calculation of $M_k$. if all possibilities are tested, the amount of computations becomes $O(2^p)$.
 \begin{align}\label{fo:BestSubsetCalculationAmounts}
 	\begin{pmatrix}
 		p \\ k
