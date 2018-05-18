@@ -37,8 +37,13 @@ Like $C_p$ the smaller the result of BIC, the lower the test error. The BIC meth
 Another approach to estimating test error, is to estimate test error directly using a validation set approach or cross-validation. The technique discussed in Chapter \ref{sc:crossValidation} Cross Validation, on page \pageref{sc:crossValidation}, and will only be mentioned briefly here. The Cross-validation technique can be utilized to estimate the test error of models by splitting the original sample, into a training set to train the model and a test set to evaluate the model. Compared to using Mallow's Cp, AIC, BIC and Adjusted R-squared, this technique does not require a estimate of the test error neither the error variance, which can be very problematic to find especially in non-linear models.
 
 \subsection{Results}
+<<<<<<< Updated upstream
 \subsubsection*{LAB 6.5.3}
 The Lab 6.5.3\footnote{Appendix 12 - 6.5.3 Choosing Among Models Using the Validation Set Approach and Cross-Validation} continues to uses baseball players data and try to look at the test error when predicting, the salary of the players, on the basis of various statistics associated with their performance in the previous year. The procedure is the same as before for preparing the data, define some functions to calculate RSS and to perform both validation set and cross-validation approaches.
+=======
+\subsubsection*{LAB 6.5.3}%TODO rewrite
+The Lab 6.5.3 continues to use baseball players data and try to look at the test error when predicting, the salary of the players, on the basis of various statistics associated with their performance in the previous year. The procedure is the same as before for preparing the data, define some functions to calculate RSS and to perform both validation set and cross-validation approaches.
+>>>>>>> Stashed changes
 
 Making the Validation set on both best subset and forward stepwise selection gives the results seen on Figure \ref{fig:validatedBestSubsetAndForwardStepwise}. The cross-validation method gives the results on Figure \ref{fig:crossValidationRSS}, with $k=10$.
 
