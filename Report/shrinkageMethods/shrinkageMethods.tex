@@ -9,7 +9,7 @@ A norm is a function that gives a positive length to each vector in a vector spa
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\textwidth]{shrinkageMethods/fig/normsL1_L2.jpg}
+	\includegraphics[width=0.5\textwidth]{shrinkageMethods/fig/normsL1_L2.jpg}
 	\caption{The red eclipse shows the concurs of ridge (left) and lasso (right) regression. The blue areas are constraint regions for the first and second norm. Notice that lasso intersects the constraint region at an axis, whereas ridge does not.}
 	\label{fig:normfirstsecond}
 \end{figure}
@@ -37,8 +37,8 @@ From equations \ref{fo:RidgeRegression} and \ref{fo:TheLasso} we see that a Lass
 %TODO Confusing conclussion
 
 \section{Results}
-\subsubsection*{LAB 6.6.1}%TODO rework lab
-Lab 6.6.1 uses Ridge Regression on the hitters dataset. Using scikit-lean and their implementation. Some players were missing salary, therefor these were dropped out. The data also contained some string values and using pandas they were converted  into dummy variables.  
+\subsubsection*{LAB 6.6.1}
+Lab 6.6.1\footnote{Appendix 13 - 6.6.1 Ridge Regression} uses Ridge Regression on the hitters dataset. Using scikit-lean and their implementation. Some players were missing salary, therefor these were dropped out. The data also contained some string values and using pandas they were converted  into dummy variables.  
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{shrinkageMethods/fig/data.png}
@@ -85,7 +85,7 @@ Using a plot it is also seen that trends coefficients move toward zero.
 	\caption{Ridge regression on the hitters dataset}
 	\label{fig:plot}
 \end{figure}
-Lab 6.6.2 uses The Lasso and the same steps to prepare the dataset as before. In Lasso there is a need to find best alpha and the fastest way is to use LassoCV that has cross validation built ind.
+Lab 6.6.2\footnote{Appendix 14 - 6.6.2 The Lasso} uses The Lasso and the same steps to prepare the dataset as before. In Lasso there is a need to find best alpha and the fastest way is to use LassoCV that has cross validation built ind.
 
 \noindent\textit{1072.2672220103254}
 
